@@ -1,0 +1,25 @@
+
+
+product:
+    crud
+
+service:
+    cru
+
+perfil:
+    forms 
+
+==========================================
+Mathias:
+    -slide.html:
+        carrosel comum 
+
+Para:
+    -header.html:
+        menu para desktop e menu para celular
+    -footer.html
+Enrique:
+
+
+Todos:
+    ir checando se a partir do index.html tudo functiona
