@@ -9,5 +9,21 @@
     <div id="header"></div>
     <div id="container"></div>
     <div id="footer"></div>
+    <script>
+        url = 'file:///home/math-o5/Desktop/treinamento/pet_shop/public/header.html'
+        console.log('jjkjs')
+        function fetchHtml(url) {
+            fetch('./public/header.html')
+            .then((response) => {
+                return response.text();
+            })
+            .then((html) => {
+                document.body.innerHTML = html     
+            }).catch(function(err) {  
+                console.log('Fetch Error', err);  
+            });
+        }
+        fetchHtml(url)
+    </script>    
 </body>
 </html>
