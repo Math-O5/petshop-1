@@ -1,5 +1,18 @@
 # pet_shop
-trabalhinho
+
+<h2>Mathias Fernandes, n°10734352</h2>
+<h2>Enrique Teles, n°10724326</h2>
+<h2>Marcus Pará, n°XXXX</h2>
+
+<h2>Running... localhost:8000/index.html</h2>
+
+```
+python3 -m http.server 
+```
+
+```
+python -m SimpleHTTPServer
+```
 
 funcionalidades:
     - sem autentificacao:
