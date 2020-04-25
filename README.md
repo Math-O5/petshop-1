@@ -14,15 +14,14 @@ python3 -m http.server
 python -m SimpleHTTPServer
 ```
 
-funcionalidades:
+<h2>funcionalidades:</h2>
     - sem autentificacao:
         - registrar cliente
         - login
         - home
         - about
 
-    (name, id, photo, phone, email)
-    - admin
+    - admin(name, id, photo, phone, email)
         - listar / remover administradores
         - adicionar administrador
         - editar administrador
@@ -57,3 +56,58 @@ funcionalidades:
 
         - carrinho
         - compra
+
+<h2>Tables</h2>
+<ul>
+    <li>Produtos</li>    
+    <ul>
+        <li>id</li>
+        <li>foto</li>
+        <li>Marca</li>
+        <li>typeofPet</li>
+        <li>preço</li>
+    </ul>
+    <li>Serviços</li>    
+    <ul>
+        <li>id</li>
+        <li>agendamento</li>
+        <li>Pets</li>
+        <li>Preço</li>
+        <li>Client</li>
+    </ul>
+    <li>Client</li>    
+    <ul>
+        <li>id</li>
+        <li>nomeCompleto</li>
+        <li>login</li>
+        <li>password</li>
+        <li>foto</li>
+        <li>telefone</li>
+        <li>nascimento</li>
+        <lii>email<li>
+        <li>endereço<li>
+        <li>cartaoDeCredito</li>
+        <li>lista : Pet<li>
+        <li>Carrinho</li>
+    </ul>
+    <li>Pet</li>    
+    <ul>
+        <li>id</li>
+        <li>nome</li>
+        <li>descrição</li>
+        <li>raça</li>
+        <li>nascimento<li>
+    </ul>
+    <li>Marcas</li>    
+    <ul>
+        <li>id</li>
+        <li>nome</li>
+        <li>descricao</li>
+    </ul>
+    <li>Carrinho</li>    
+    <ul>
+        <li>Produto</li>
+        <li>quantidade</li>
+        <li>pendente</li>
+    </ul>
+</ul>
