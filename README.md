@@ -62,18 +62,28 @@ python -m SimpleHTTPServer
     <li>Produtos</li>    
     <ul>
         <li>id</li>
+        <li>nome</li>
         <li>foto</li>
-        <li>Marca</li>
-        <li>typeofPet</li>
-        <li>preço</li>
+        <li>Marca : Marca</li>
+        <li>typeofPet : string</li>
+        <li>preço : double</li>
+        <li>quantidVendia : int</li>
     </ul>
     <li>Serviços</li>    
     <ul>
         <li>id</li>
-        <li>agendamento</li>
-        <li>Pets</li>
-        <li>Preço</li>
+        <li>nome</li>
+        <li>preço : double</li>
+        <li>detalhes : string</li>
+        <li>maximoSlot : int</li> <!-- marca o maximo de slots em dado horario -->
+    </ul>
+    <li>Reserva</li>    
+    <ul>
+        <li>id</li>
         <li>Client</li>
+        <li>Slot</li>
+        <li>Pet</li>
+        <li>Servico</li>
     </ul>
     <li>Client</li>    
     <ul>
@@ -92,6 +102,7 @@ python -m SimpleHTTPServer
     </ul>
     <li>Pet</li>    
     <ul>
+        <li>Client</li>
         <li>id</li>
         <li>nome</li>
         <li>descrição</li>
@@ -100,14 +111,20 @@ python -m SimpleHTTPServer
     </ul>
     <li>Marcas</li>    
     <ul>
-        <li>id</li>
-        <li>nome</li>
-        <li>descricao</li>
+        <li>id : int</li>
+        <li>nome : string</li>
+        <li>descricao : string</li>
     </ul>
     <li>Carrinho</li>    
     <ul>
-        <li>Produto</li>
-        <li>quantidade</li>
-        <li>pendente</li>
+        <li>Produto : array<Produto></li>
+        <li>quantidade : int</li>
+        <li>pendente : boolean</li>
     </ul>
+    <li>Slot</li>  <!-- Cada slot é um registro de um serviço preenchido. Um slot só é gravado se estiver nos horários de trabalho. -->  
+    <ul>
+        <li>data : string</li>
+        <li>hora: int</li>
+        <li>min: int</li>
+    </ul>   
 </ul>
