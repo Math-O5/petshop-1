@@ -140,6 +140,12 @@ h1 {
     padding: 0px 9px 0px 0px;
 }
 
+::placeholder {
+    color: #490A3D;
+    padding: 10px;
+    opacity: 1; /* Firefox */
+}
+
 #filtro-services {
     background-color: white;
     width: 17vw;
