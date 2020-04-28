@@ -147,10 +147,6 @@
 /* Details */
 .content-detail-services {
     display: flex;
-    /* width: fit-content; */
-    /* grid-template-columns: aut; */
-    /* margin: 2vh  8vw 3vh; */
-    /* padding: 2vh 2vw; */
     opacity: 1;
 }
 
@@ -168,19 +164,24 @@ a button {
 
 .content-detail-services .perfil-detail-services {
     float: left;
-    width: 30%;
-    padding: 5vh 5vw 0vh 10vw;
+    width: 20%;
 }
 
+.content-detail-services .perfil-detail-services {
+    margin: 5vh 5vw 0vh 10vw;
+    background-color: #f0f0f0;
+    border-radius: 20px 20px 0 0px;
+    border: #f0f0f0 solid 0px;
+}
 .content-detail-services .perfil-detail-services img {
     width: 100%;
     border-radius: 10px 10px 0 0px;
-    border: rgb(190, 190, 190) solid 1px;
+    border: rgb(255, 255, 255) solid 1px;
 }
 
 .content-detail-services .text-services-detail {
     float: left;
-    width: 40%;
+    width: 50%;
     padding: 5vh 5vw 0vh 0vw;
     color: #490A3D;
 }
@@ -196,18 +197,53 @@ a button {
     padding: 0 0 2vh 0;
 }
 
+/* Schedule */
 .content-detail-services .schedule-services {
-    grid-column-start: 6;
-    grid-column-end: 8;
     width: 30%;
     padding: 5vh 5vw 0vh 0vw;
-    height: 80%;
     display: flex;
     flex: wrap;
     flex-direction: column;  
     justify-content: center;
+    /* background-color: #F8CA00; */
+    margin: 0;
 }
 
+.content-detail-services .schedule-services div {
+    color: white;
+    background-color: rgb(168, 33, 80);
+    margin: 5vh;
+    border-radius: 30px;
+    padding: 1vh 1vw;
+    text-align: center;
+}
+
+label {
+    color: #707070;
+}
+
+#price {
+    color: #BD1550;
+    font-weight: 700;
+    font-size: 29px;
+}
+
+#data {
+    margin: 10px;
+    width: 15vw;
+    color: #490A3D;
+}
+
+#hora {
+    margin: 10px;
+    width: 13vw;
+    background-color: white;
+    text-align: center;
+    justify-content: center;
+    color: #490A3D;
+}
+
+ /* Detalhes */
 .details-container {
     grid-column-start: 1;
     grid-column-end: 8;
@@ -227,4 +263,5 @@ a button {
 
 .details-container p {
     color:#707070;
+    margin: 5vh;
 }

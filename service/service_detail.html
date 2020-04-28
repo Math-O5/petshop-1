@@ -15,7 +15,9 @@
         <a href="services.html" rel="noopener noreferrer"><button>< Voltar</button></a>
         <div class="content-detail-services">
                 <div class="perfil-detail-services">
-                    <img src="../img/pet.png"></img>
+                    <!-- <img src="../img/pet.png"></img> -->
+                    <img src="../img/dog.png"></img>
+
                 </div>
                 <div class="text-services-detail">
                     <h2>Tosa</h2>
@@ -25,15 +27,18 @@
                 </div>
                 <div class="schedule-services">
                     <p>AGENDE SOMENTE POR:</p>
-                    <h2>R$ 15.00</h2>
+                    <h2 id="price">R$ 15.00</h2>
                     <p>Apenas à vista</p>
-                    <input type="date"></input>
-                    <label>Data: </label>
-                    <select id="filtro-services" name="services-filter">
-                        <option value="1">12:00</option>
-                        <option value="2">13:00</option>
-                    </select>  
-                    <button>AGENDAR SERVIÇO</button>
+                    <label>Data: 
+                        <input id="data" type="date"></input>
+                    </label>
+                    <label>Hora: 
+                        <select id="hora" name="hora">
+                            <option value="1">12:00</option>
+                            <option value="2">13:00</option>
+                        </select>  
+                    </label>
+                    <div>AGENDAR SERVIÇO</div>
                 </div>
         </div>
         <div class="details-container">
