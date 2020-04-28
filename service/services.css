@@ -57,14 +57,37 @@
 #serch-services {
     width: 30vw;
 }
+
 .col-12-services {
-    background-color: rgb(248, 187, 102);
+    background-color:white;
+    color: #490A3D;
     display: inline-block;
     box-shadow: 0px 10px 8px #0000001F;
     text-align: center;
     width: 100%;
     margin: 10px 0px;
     padding: 3vh 0vw 3vh;
+}
+
+.col-12-services h2 {
+    text-align: left;
+    padding: 0vh 3vw;
+}
+
+.col-12-services p {
+    color: #8A98BA;
+    text-align: left;
+    padding: 0vh 3vw;
+}
+
+.col-12-services button {
+    float: right;
+    color: white;
+    background-color: #BD1550;
+    padding: 0vh 2vw;
+    border-radius: 30px;
+    border: 0;
+    margin: 0vh 2vw;
 }
 
 .col-12-services:hover {
