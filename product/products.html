@@ -10,12 +10,10 @@
     <title>Produtos</title>
 </head>
 <body>
-    
     <div class="container">
         <div class="heading-container">
             <h1>PRODUTOS</h1>
         </div>
-        
         <div class="content-container">
             <div class="categories-container">
                 <div class="category">
@@ -59,7 +57,7 @@
                 </div>
             </div>
             <main class="products-container">
-                <div class="search-bar">
+                <!-- <div class="search-bar">
                     <div class="input-container">
                         <input type="text" 
                             id="search-product"
@@ -73,6 +71,26 @@
                                 id="sort-products"
                         >
                             <option value="" selected></option>
+                            <option value="Preço">Preço</option>
+                            <option value="Nome">Nome</option>
+                            <option value="Marca">Marca</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="row-services">
+                    <div class="input-container">
+                        <input type="text" 
+                            id="serch-services"
+                            name="search-product"
+                            placeholder="Pesquisar produto"
+                        >
+                    </div>
+                    <div class="input-container">
+                        <label for="sort-products">Ordenar por: </label>
+                        <select name="Ordenar por" 
+                                id="filtro-services"
+                        >
+                            <option value="" selected>Todos</option>
                             <option value="Preço">Preço</option>
                             <option value="Nome">Nome</option>
                             <option value="Marca">Marca</option>
