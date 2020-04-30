@@ -265,3 +265,26 @@ label {
     color:#707070;
     margin: 5vh;
 }
+
+@media (max-width: 800px) {
+    .content-detail-services {
+        display: flex;
+        flex-direction: column;
+
+        padding-left: 5vw;
+    }
+    .content-detail-services .perfil-detail-services {
+        margin: 2px;
+
+        width: 90%;
+    }
+    .content-detail-services .text-services-detail, 
+    .content-detail-services .schedule-services
+    {
+        width: 90%;
+    }
+    .details-container {
+        padding-left: 5vw;
+        width: 90%;
+    }
+}
