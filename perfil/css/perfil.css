@@ -1,0 +1,95 @@
+.container-perfil {
+    font-family: 'Josefin Sans', sans-serif;
+    color: #8A98BA;
+    padding: 5vh 10vw;
+}
+
+h1 {
+    font-size: 37px;
+}
+h1, h2{
+    font-weight: 700;
+    color: #490A3D;
+    margin-top: 0px;
+}
+
+h2 {
+    border-width: 0px 0px 1px;
+    border-style: solid;
+    border-color: #490A3D;
+}
+
+.perfil-info {
+    display: flex;
+    justify-content: stretch;
+    margin: 50px 0px;
+}
+.perfil-info img{
+    width: 30%;
+    margin-left: 0px;
+    border: 1px solid #707070;
+    opacity: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.perfil-info .details-container {
+    margin-left: 50px;
+    flex-grow: 1;
+}
+
+.perfil-info th , 
+.pagamento-info{
+    text-align: left;
+    vertical-align: top;
+
+}
+.perfil-info .details-container td {
+    display: block;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+.container-perfil .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.container-perfil .button-container button{
+    background-color: #BD1550;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 10px 50px;
+    border-radius: 21px;
+    border-style: none;
+    color: white;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+
+
+@media (max-width: 500px) {
+    .container-perfil {
+        padding: 0px 0px;
+    }
+    .perfil-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    .container-perfil table, 
+    .container-perfil table tr{
+        display: flex;
+        flex-direction: column;
+    }
+    .container-perfil table tr td{
+        margin: 10px 0px !important;
+    }
+    .perfil-info img {
+        width: 80%;
+        margin: 0px auto 50px;
+    }
+    .perfil-info .details-container {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
