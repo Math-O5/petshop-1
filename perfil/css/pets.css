@@ -121,6 +121,7 @@ h1{
     padding: 8px 14px;
     font-size: 15px;
     font-family: 'Josefin Sans', sans-serif;
+    cursor: pointer;
 }
 
 .pet-description div button:nth-of-type(2) {

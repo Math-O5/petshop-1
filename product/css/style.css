@@ -406,6 +406,7 @@ a button {
     border-radius: 20px;
     border: none;
     text-align: center;
+    cursor: pointer;
 }
 
 @media (max-width: 800px) {
