@@ -1,38 +1,14 @@
-@font-face {
-    font-family: Poppins-Medium;
-    src: url(../css/Poppins/Poppins-Medium.ttf);
-}
-
-* {
-    margin: 0px;
-    font-family: Poppins-Medium;
-    font-weight: lighter;
-}
-
 /* Header */
-.container-services {
-    background: #F8CA00 0% 0% no-repeat padding-box;
-    border: 1px solid #707070;
-    opacity: 1;
-    padding: 7vh 10vw;
-    position: relative;
+.container-header {
+    background: rgb(248, 202, 0, 0.9) 0% 0% no-repeat padding-box;
 }
 
-.container-services .background-services {
-    position: absolute;
-    z-index: 0;
-    top: 0px;
-    background-image: url("../img/all.png"); 
-    background-repeat: repeat-x;
-    opacity: 0.3;
-    width: 88%; 
-    height: 100%;
+.container-header:hover {
+    background: rgb(248, 202, 0, 0.5) 0% 0% no-repeat padding-box;
 }
 
-.container-services h1 {
+.container-header h1 {
     color: #490A3D;
-    text-align: left;
-    font-size: 34px;
 }
 
 /* Containers */
@@ -101,10 +77,11 @@
     float: right;
     color: white;
     background-color: rgb(168, 33, 80);
-    padding: 0vh 2vw;
+    padding: 1vh 2vw;
     border-radius: 30px;
+    font-weight: 800;
     border: 0;
-    margin: 1.5vh 2vw;
+    margin: 2vh 2vw;
 }
 
 .col-12-services img {

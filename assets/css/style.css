@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+.container-header {
+    /* border: 1px solid #707070; */
+    padding: 7vh 10vw;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-header .background-header {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    background-image: url("../../assets/img/all.png"); 
+    background-repeat: repeat;
+    opacity: 1;
+    width: 88%;  
+    height: 100%;
+}
+
+.container-header h1 {
+    text-align: left;
+    font-size: 34px;
+    font-weight: 500;
+}

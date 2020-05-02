@@ -38,7 +38,9 @@
 }
 
 .items {
-    height: fit-content;
+    overflow:hidden;
+    overflow-y:scroll;
+    height: 50vh;
 }
 
 .items table{
@@ -53,6 +55,7 @@
     background-color: #F6F6F6;
     
 }
+
 table tr th,
 table tr td {
     text-align: left;
@@ -73,7 +76,6 @@ table tr td {
     width: 20px;
     height: 20px;
     padding: 0px;
-
 }
 
 .items table tr td button:active {
@@ -101,6 +103,7 @@ tr td input {
     padding: 8px 5px;
     height: 100%;
 }
+
 .frete ::placeholder {
     padding-left: 5px;
 }
@@ -160,6 +163,8 @@ tr td input {
     color: white;
     font-weight: 700;
     cursor: pointer;
+    margin-top: 7vh;
+    margin-bottom: 0;
 }
 @media (max-width: 700px) {
     .carrinho-content {

@@ -27,38 +27,19 @@ h2 {
     border-color: #490A3D;
 }
 
-.heading-container h1 {
-    margin-bottom: 0px;
-}
-
-.heading-container h1 a{
+.container-header h1 a {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 34px;
     text-decoration-style: solid;
 }
 
-.heading-container {
-    padding: 7vh 10vw 7vh;
-    border: 1px solid #707070;
-    background-color: #E97F02;
-    text-align: left;   
-    box-sizing: border-box;
-    margin: 0px;
-    margin-block-end: 0;
-    margin-block-start: 0;
-    width: 100%;    
-    position: relative;
+.container-header {
+    background-color: rgb(232, 125, 2, 0.9);
 }
-.background-header {
-    position: absolute;
-    z-index: 0;
-    top: 0px;
-    background-image: url("../../img/all.png"); 
-    background-repeat: repeat-x;
-    opacity: 0.3;
-    width: 88%; 
-    height: 100%;
+
+.container-header:hover {
+    background-color: rgb(232, 125, 2, 0.5);
 }
 
 .perfil-info {
