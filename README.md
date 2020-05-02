@@ -1,63 +1,63 @@
-# pet_shop
+<h1>Pet Shop Online :dog: </h1>
 
-<h2>Mathias Fernandes, n°10734352</h2>
-<h2>Enrique Teles, n°10724326</h2>
-<h2>Marcus Pará, n°XXXX</h2>
+
+<h2 style="color:#1589F0;">Desenvolvedores</h2>
+<p>Mathias Fernandes, n° 10734352<p>
+<p>Enrique Teles, n° 10724326</p>
+<p>Marcus Pará, n° XXXX</p>
+
+***
+
+<h2>Descrição</h2>
+<p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3 e React. O intuito foi apenas utilizar os conceitos de web para produzir um site com navegabilidade, acessibilidade, funcionalidades e uma interface agradável.</p>
 
 <h2>Running... localhost:8000/index.html</h2>
 
 ```
 python3 -m http.server 
 ```
-
 ```
 python -m SimpleHTTPServer
 ```
 
-<h2>funcionalidades:</h2>
-    - sem autentificacao:
-        - registrar cliente
-        - login
-        - home
-        - about
+<h2>Fluxograma recomendado para o usuário</h2>
+<p align="center">
+	<img src="/fluxo_de_navegacao.png" width="50%" heigth="50%" alt="fluxograma_de_navegação"></img>
+</p>
 
-    - admin(name, id, photo, phone, email)
-        - listar / remover administradores
-        - adicionar administrador
-        - editar administrador
-
-        - listar / remover clientes
-        - adicionar cliente
-        - editar cliente
-
-        - listar / remover serviços
-        - adicionar serviço
-        - editar serviço
-
-        - listar produtos
-        - adicionar produto
-        - editar produto
-
-        - lucro da loja
-
-    - client (nome, foto, telefone, email, endereço, cartão de crédito, idade)
-        (name, id, photo, race, age)
-        - ver animais registrados 
-        - registrar animal (
-
-        (name, id, photo, description, price, quantity (in stock), quantity sold)
-        - visualizar produtos 
-        - visualizar produto (opcao de compra)
-
-        (name, id, photo, description, price)
-        - visualizar serviços 
-        - visualizar serviço)
-        - contratar serviço (calendário)
-
-        - carrinho
-        - compra
-
-<h2>Tables</h2>
+<h2>Funcionalidades implementadas</h2>
+<table style="width:100%">
+  <tr>
+    <th>Cliente</th>
+    <th>Home</th> 	
+    <th>About</th>    
+    <th>Login</th>
+    <th>Produtos</th> 
+    <th>Serviços</th> 
+    <th>Perfil</th> 
+    <th>Carrinhos</th> 
+    <th>Pets</th>
+    <th>Relatório</th> 
+  </tr>
+  <tr>
+    <td>Público</td>
+  </tr>
+  <tr>
+    <td>Usuário</td>
+    <td>Ver</td>
+    <td>Ver</td>
+    <td>Ver</td>
+  </tr>
+  <tr>
+    <td>Admin</td>
+    <td>Ver</td>
+    <td>Ver</td>
+    <td>Ver/Editar</td>
+  </tr>
+</table>
+<br>
+<h2>Dados</h2>
+<p>Informações salvas no banco de dados e a relação entre elas.</p>
 <ul>
     <li>Produtos</li>    
     <ul>
@@ -128,3 +128,5 @@ python -m SimpleHTTPServer
         <li>min: int</li>
     </ul>   
 </ul>
+
+
