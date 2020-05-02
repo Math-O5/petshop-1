@@ -83,16 +83,29 @@ python -m SimpleHTTPServer
 	</tr>
 	<tr>
 		<td>V  : Ver</td>
-		<td>A  : Adicionar</td>
-		<td>E  : Editar</td>
-		<td>R  : Remover</td>
-		<td>C  : Comprar</td>
-		<td>Ag : Agendar>
-		<td>Re : Registrar-se>
-		<td>:x: : não disponivel</td>
-		<td>V/R</td>
-		<td>V</td>
 	</tr>
+	<tr>
+		<td>A  : Adicionar</td>
+	</tr>
+	<tr>
+		<td>E  : Editar</td>
+	</tr>
+	<tr>
+		<td>R  : Remover</td>
+	</tr>
+	<tr>
+		<td>C  : Comprar</td>
+	</tr>
+	<tr>
+		<td>Ag : Agendar>
+	</tr>
+	<tr>
+		<td>Re : Registrar-se>
+	</tr>
+	<tr>
+		<td>:x: : não disponivel</td>
+	</tr>
+
 </table>
 </br>
 <h2>Dados :open_file_folder:</h2>
@@ -133,10 +146,10 @@ python -m SimpleHTTPServer
         <li>foto</li>
         <li>telefone</li>
         <li>nascimento</li>
-        <lii>email<li>
-        <li>endereço<li>
+        <lii>email</li>
+        <li>endereço</li>
         <li>cartaoDeCredito</li>
-        <li>lista : Pet<li>
+        <li>lista : Pet</li>
         <li>Carrinho</li>
     </ul>
     <li>Pet</li>    
