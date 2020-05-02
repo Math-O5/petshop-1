@@ -9,7 +9,8 @@
 ***
 
 <h2>Descrição</h2>
-<p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3 e React. O intuito foi apenas utilizar os conceitos de web para produzir um site com navegabilidade, acessibilidade, funcionalidades e uma interface agradável.</p>
+<p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3 e React. O intuito foi aplicar conceitos de web e UX Design – User experience - para prática-los.</p>
+<p>No site, foram desenvolvidas funcionalidades que pudessem gerar uma interface entre o pet shop que vende produtos e serviços e os clientes. Assim, criamos essas duas seções principais, que permite administradores púbicarem e modificarem serviços e produtos, enquantos os clientes, ao cadastrarem-se, podem comprar, adicionar ao carrinho, cadastrar pets e agendar serviços. Outras funcionalidades adjacêntes também foram implementadas. A seguir uma descrição técnica.</p>
 
 <h2>Running... localhost:8000/index.html</h2>
 
@@ -21,6 +22,7 @@ python -m SimpleHTTPServer
 ```
 
 <h2>Fluxograma recomendado para o usuário</h2>
+<p>A</p>
 <p align="center">
 	<img src="/fluxo_de_navegacao.png" width="50%" heigth="50%" alt="fluxograma_de_navegação"></img>
 </p>
