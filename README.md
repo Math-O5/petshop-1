@@ -24,9 +24,9 @@ python -m SimpleHTTPServer
 <p align="center">
 	<img src="/fluxo_de_navegacao.png" width="50%" heigth="50%" alt="fluxograma_de_navegação"></img>
 </p>
-
+</br>
 <h2>Funcionalidades implementadas</h2>
-<table style="width:100%">
+<table style="text-align:center; width:100%">
   <tr>
     <th>Cliente</th>
     <th>Home</th> 	
@@ -41,22 +41,61 @@ python -m SimpleHTTPServer
   </tr>
   <tr>
     <td>Público</td>
+    <td>V</td>
+    <td>V</td>
+    <td>Re</td>
+    <td>V</td>
+    <td>V</td>
+    <td>:x:</td>
+    <td>:x:</td>
+    <td>:x:</td>
+   <td>:x:</td>
   </tr>
   <tr>
     <td>Usuário</td>
-    <td>Ver</td>
-    <td>Ver</td>
-    <td>Ver</td>
+     <td>V</td>
+    <td>V</td>
+    <td>Entrar</td>
+    <td>V/C</td>
+    <td>V/Ag</td>
+    <td>V/E</td>
+    <td>V/E/R</td>
+    <td>V/E/A/R</td>
+    <td>:x:</td>
   </tr>
   <tr>
     <td>Admin</td>
-    <td>Ver</td>
-    <td>Ver</td>
-    <td>Ver/Editar</td>
+    <td>V</td>
+    <td>V</td>
+    <td>V/A/E/R</td>
+    <td>V/A/E/R</td>
+    <td>V/A/E/R</td>
+    <td>V/A/R</td>
+    <td>V/R</td>
+    <td>V/R</td>
+    <td>V</td>
   </tr>
 </table>
-<br>
-<h2>Dados</h2>
+</br>
+<table>
+	<tr>
+		<th>Legenda</th>
+	</tr>
+	<tr>
+		<td>V  : Ver</td>
+		<td>A  : Adicionar</td>
+		<td>E  : Editar</td>
+		<td>R  : Remover</td>
+		<td>C  : Comprar</td>
+		<td>Ag : Agendar>
+		<td>Re : Registrar-se>
+		<td>:x: : não disponivel</td>
+		<td>V/R</td>
+		<td>V</td>
+	</tr>
+</table>
+</br>
+<h2>Dados :open_file_folder:</h2>
 <p>Informações salvas no banco de dados e a relação entre elas.</p>
 <ul>
     <li>Produtos</li>    
