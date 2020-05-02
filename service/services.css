@@ -160,6 +160,7 @@ a button {
     border-radius: 20px;
     border: none;
     text-align: center;
+    cursor: pointer;
 }
 
 .content-detail-services .perfil-detail-services {
@@ -209,11 +210,17 @@ a button {
     margin: 0;
 }
 
-.content-detail-services .schedule-services div {
+.content-detail-services .schedule-services a {
+    width: 100%;
+}
+
+.content-detail-services .schedule-services a button {
     color: white;
     background-color: rgb(168, 33, 80);
-    margin: 5vh;
+    margin: 5vh 0px;
+    width: 100%;
     border-radius: 30px;
+    border-style: none;
     padding: 1vh 1vw;
     text-align: center;
 }
