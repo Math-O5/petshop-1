@@ -160,23 +160,25 @@ main .banner .banner_left .content {
 }
 
 main .banner .banner_left .content h1 {
-    font: 500 80px Poppins;
+    font-weight: 500;
+    font-family: Poppins;
+    font-size: 6vw;
     color: rgba(73, 10, 61, 1);    
 }
 
 main.user .banner .banner_left .content h1 {
-    font: 500 34px Poppins;
+    font: 500 15vw Poppins;
 
 }
 
 main .banner .banner_left .content p {
-    font: 400 18px/28px Open Sans;
+    font: 400 1vw Open Sans;
     color: rgba(73, 10, 61, 1);    
     text-align: center;
 }
 
 main .banner .banner_left .content button {
-    font: 700 12px Montserrat;
+    font: 700 2vh Montserrat;
     text-align: center;
 }
 
