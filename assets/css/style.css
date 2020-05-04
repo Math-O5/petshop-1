@@ -4,6 +4,75 @@
     font-weight: 500;
 }
 
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+    height: 10vh;
+    background: #fff;
+    box-shadow: 0px 3px 15px #00000029;
+}
+
+header.user {
+    justify-content: flex-start;
+}
+
+header .logo {
+    cursor: pointer;
+}
+header.geral .logo {
+    margin-right: auto;
+}
+
+header .nav__links {
+    list-style: none;
+}
+
+header .nav__links li {
+    display: inline;
+    padding: 0px 20px;
+    margin-left: 50px;
+}
+
+header .nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+
+header .nav__links li a:hover {
+    color: rgba(73, 10, 61, 0.6);
+}
+
+header.user .user-area {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+header.user .user-area a {
+    display: flex;
+}
+
+header.user .user-area * {
+    margin-left : 10px;
+    text-transform: uppercase;
+}
+
+header button {
+    margin-left: 50px;
+    padding: 9px 50px;
+    background-color: #490A3D;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+header button:hover {
+    background-color: rgba(73, 10, 61, 0.8);
+}
+
 a {
     text-decoration: none;
     color: unset;
