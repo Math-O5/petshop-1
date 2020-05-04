@@ -1,0 +1,284 @@
+* {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.button {
+    width: 220px;
+    background: rgba(73, 10, 61, 1);
+    color: white;
+    border: 0;
+    height: 60px;
+    border-radius: 100px;
+    font-weight: 700;
+    margin-top: 16px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 60px;
+    transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+    background-color: rgba(73, 10, 61, 0.8);
+}
+
+li, a, button {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    font: Bold 14px Montserrat;
+    letter-spacing: 0.95px;
+    color: rgba(73, 10, 61, 1);
+}
+
+main {
+    margin: 5px 10vw;
+}
+
+main .title {
+    display: flex;
+    margin: 50px 0;
+}
+
+main .title h1 {
+    margin-right: auto;
+}
+main .title a {
+    margin-left: auto;
+    vertical-align: middle;
+}
+
+main .title button {
+    text-align: center;
+    margin: 0;
+}
+
+main .filter {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    border: none;
+}
+
+main .filter input {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    font: 400 16px Roboto, sans-serif;
+    padding: 0 24px;
+}
+
+main .filter select {
+    height: 40px;
+    margin-left: 10px;
+    padding: 0 24px;
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    font: 400 16px Roboto, sans-serif;
+}
+
+
+main table {
+    width: 100%;
+    font: 500 14px Poppins;
+    margin-bottom: 100px;
+    border-spacing:0 5px;
+}
+
+main tr {
+    height: 40px;
+    font: 500 16px Poppins;
+    box-shadow: 0px 3px 6px #00000024;
+    border-radius: 5px;
+}
+
+main table tbody a {
+    display: block;
+}
+
+main table td {
+    padding-left: 20px;
+}
+
+main table thead {
+    background-color: #f6f6f6;
+}
+
+main table tbody tr {
+    background-color: #fff;
+}
+
+/* id */
+main .row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-bottom: 5px;
+}
+
+main p:nth-child(1) {
+    font: 500 18px Poppins;
+}
+
+main p:nth-child(2) {
+    font: 400 18px Poppins;
+    margin-left: 10px;
+}
+
+main .row a {
+    width: 100%;
+    display: flex;
+}
+    
+main .row a {
+    border-radius: 20px;
+    margin: 20px 0;
+    flex-grow: 1;
+    width: 50%;
+}
+main .row button {
+    width: 100%;
+}
+
+main .row a:nth-child(2) {
+    margin-left: 20px;
+}
+
+main .row button.edit {
+    background-color: rgb(17, 175, 17);
+    /* width: 50%; */
+}
+
+main .row button.delete {
+    background-color: rgb(175, 17, 17);
+}
+
+/* add */
+main .info input {
+    height: 30px;
+    margin-left: 10px;
+    border: 1px solid #dcdce6;
+    border-radius: 5px;
+    font: 400 16px Roboto, sans-serif;
+    padding: 0 24px;
+}
+
+main .row button.add {
+    width: 100%;
+    background-color: rgb(17, 175, 17);
+}
+
+/* header */
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 10%;
+    height: 10vh;
+    background: #fff;
+    box-shadow: 0px 3px 15px #00000029;
+}
+
+header .logo {
+    cursor: pointer;
+}
+
+header .nav__links {
+    list-style: none;
+}
+
+header .nav__links li {
+    display: inline;
+    padding: 0px 20px;
+    margin-left: 50px;
+}
+
+header .nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+
+header .nav__links li a:hover {
+    color: rgba(73, 10, 61, 0.6);
+}
+
+header .user-area {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+header .user-area a {
+    display: flex;
+}
+
+header .user-area * {
+    margin-left : 10px;
+    text-transform: uppercase;
+}
+
+header button {
+    margin-left: 50px;
+    padding: 9px 50px;
+    background-color: #490A3D;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+header button:hover {
+    background-color: rgba(73, 10, 61, 0.8);
+}
+
+
+/* footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    display: flexbox;
+    width: 100%;
+    height: 30vh;
+    padding: 0px 10vw;
+    background: #1D1D1D;
+    color: white;
+    font: 400 14px Open Sans;
+}
+
+footer .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    width: 100%;
+    padding-top: 100px;
+}
+
+footer .content .social img {
+    margin-right: 50px;
+}
+footer .content .social img:last-child {
+    margin-right: 0px;
+}
+
+footer .end {
+    width: 100%;
+    text-align: center;
+    font: 400 14px Open Sans;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 60px;
+    margin-bottom: 0;
+}
