@@ -11,39 +11,7 @@
     <title>Home</title>
 </head>
 <body>
-    <header class="geral">
-        <div class="main">
-            <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
-            <nav class="mobile">
-                <img src="assets/img/menu.svg" alt="menu" id="menu">
-                
-            </nav>
-            <div class="right">
-                <nav class="desktop">
-                    <ul class="nav__links">
-                        <ul class="nav__links">
-                            <li><a href="../public/about.html">Sobre nós</a></li>
-                            <li><a href="../product/products.html">Nossos produtos</a></li>
-                            <li><a href="../service/services.html">Nossos serviços</a></li>
-                        </ul>
-                    </ul>
-                </nav>
-                
-    
-                <a class="enter" href="perfil/singup.html"><button>ENTRAR</button></a>
-            </div>
-        </div>
-        <div class="second" id="secondBar">
-            <ul class="nav__links ul-mobile">
-                <li><a href="#">Nossos produtos</a></li>
-                <li><a href="#">Nossos serviços</a></li>
-                <li><a href="#">Seus pets</a></li>
-                <li><a href="#">Sobre nós</a></li>
-            </ul>
-        </div>
-        
-        
-    </header>
+    <header></header>
 
     <main>
         <section class="banner">
@@ -208,45 +176,47 @@
 
     </main>
 
-    <footer>
-        <div class="content">
-            <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
-            <div class="adress">
-                <p>Rua XXXXXX, 111</p>
-                <p>São Carlos, Sp</p>
-                <p>Brasil</p>
-            </div>
-            <div class="contact">
-                <p>+55 99 99999 9999</p>
-                <p>email@example.com</p>
-            </div>
-            <div class="social">
-                <img src="assets/img/facebook.svg" alt="facebook link" >
-                <img src="assets/img/instagram.svg" alt="instagram link" >
-                <img src="assets/img/twitter.svg" alt="twitter link" >
-                <img src="assets/img/linkedin.svg" alt="linkedin link" >
-            </div>
-        </div>
-        <p class="end">2020 web. Em desenvolvimento.</p>
-    </footer>
+    <footer></footer>
 
     <script>
-        var menu = document.getElementById("menu");
-        var secondBar = document.getElementById("secondBar");
-        var mobileMenuVisible = false;
+        const load = async() => {
+            // fetch header
+            await fetch("../public/header_geral.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("header").innerHTML = data;
+                });
 
-        menu.addEventListener("click", () => {
-            if(mobileMenuVisible) {
-                mobileMenuVisible = false;
-                secondBar.style.display = "none";
+            // fetch footer
+            await fetch("../public/footer.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("footer").innerHTML = data;
+                });
 
-            }
-            else {
-                mobileMenuVisible = true;
-                secondBar.style.display = "block";
 
-            }
-        })
+            // menu show / hide
+            var menu = document.getElementById("menu");
+            var secondBar = document.getElementById("secondBar");
+            var mobileMenuVisible = false;
+
+            menu.addEventListener("click", () => {
+                if(mobileMenuVisible) {
+                    mobileMenuVisible = false;
+                    secondBar.style.display = "none";
+                }
+                else {
+                    mobileMenuVisible = true;
+                    secondBar.style.display = "block";
+                }
+            })
+            
+        }
+        load();
 
     </script>
 </body>

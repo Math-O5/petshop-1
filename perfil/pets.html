@@ -11,17 +11,8 @@
     <title>Produtos</title>
 </head>
 <body>
-    <header class="geral">
-        <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
-        <nav>
-            <ul class="nav__links">
-                <li><a href="../public/about.html">Sobre nós</a></li>
-                <li><a href="../product/products.html">Nossos produtos</a></li>
-                <li><a href="../service/services.html">Nossos serviços</a></li>
-            </ul>
-        </nav>
-        <a class="enter" href="perfil/singup.html"><button>ENTRAR</button></a>
-    </header>
+    <header></header>
+    
     <div class="container">
         <div class="container-header">
             <div class="background-header"></div>
@@ -133,6 +124,49 @@
         </div>
     </div>
 
+    <footer></footer>
+
+    <script>
+        const load = async() => {
+            // fetch header
+            await fetch("../public/header_user.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("header").innerHTML = data;
+                });
+
+            // fetch footer
+            await fetch("../public/footer.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("footer").innerHTML = data;
+                });
+
+
+            // menu show / hide
+            var menu = document.getElementById("menu");
+            var secondBar = document.getElementById("secondBar");
+            var mobileMenuVisible = false;
+
+            menu.addEventListener("click", () => {
+                if(mobileMenuVisible) {
+                    mobileMenuVisible = false;
+                    secondBar.style.display = "none";
+                }
+                else {
+                    mobileMenuVisible = true;
+                    secondBar.style.display = "block";
+                }
+            })
+            
+        }
+        load();
+
+    </script>
 
     
 </body>
