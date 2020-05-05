@@ -11,27 +11,7 @@
     <title>Home</title>
 </head>
 <body>
-    <header>
-        <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
-        <nav>
-            <ul class="nav__links">
-                <li><a href="#">Clientes</a></li>
-                <li><a href="#">Produtos</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Administradores</a></li>
-                <li><a href="#">Lucro</a></li>
-            </ul>
-        </nav>
-        <nav class="user-area">
-            <a href="#">
-                <p>User Name</p>
-                <img src="assets/img/user.svg" alt="user">
-            </a>
-            <a href="#  ">
-                <img src="assets/img/logout.svg" alt="log out">
-            </a>
-        </nav> 
-    </header>
+    <header></header>
 
     <main class="products">
         <div class="title">
@@ -76,26 +56,48 @@
 
     </main>
 
-    <footer>
-        <div class="content">
-            <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
-            <div class="adress">
-                <p>Rua XXXXXX, 111</p>
-                <p>São Carlos, Sp</p>
-                <p>Brasil</p>
-            </div>
-            <div class="contact">
-                <p>+55 99 99999 9999</p>
-                <p>email@example.com</p>
-            </div>
-            <div class="social">
-                <img src="assets/img/facebook.svg" alt="facebook link" >
-                <img src="assets/img/instagram.svg" alt="instagram link" >
-                <img src="assets/img/twitter.svg" alt="twitter link" >
-                <img src="assets/img/linkedin.svg" alt="linkedin link" >
-            </div>
-        </div>
-        <p class="end">2020 web. Em desenvolvimento.</p>
-    </footer>
+    <footer></footer>
+
+    <script>
+        const load = async() => {
+            // fetch header
+            await fetch("../public/header_user.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("header").innerHTML = data;
+                });
+
+            // fetch footer
+            await fetch("../public/footer.html")
+                .then(response => {
+                    return response.text()
+                })
+                .then(data => {
+                    document.querySelector("footer").innerHTML = data;
+                });
+
+
+            // menu show / hide
+            var menu = document.getElementById("menu");
+            var secondBar = document.getElementById("secondBar");
+            var mobileMenuVisible = false;
+
+            menu.addEventListener("click", () => {
+                if(mobileMenuVisible) {
+                    mobileMenuVisible = false;
+                    secondBar.style.display = "none";
+                }
+                else {
+                    mobileMenuVisible = true;
+                    secondBar.style.display = "block";
+                }
+            })
+            
+        }
+        load();
+
+    </script>
 </body>
 </html>
