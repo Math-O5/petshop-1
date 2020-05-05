@@ -18,6 +18,10 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+.container-header {
+    background: rgb(248, 202, 0, 0.9) 0% 0% no-repeat padding-box;
+}
+
 main .banner {
     position: relative;
     width: 100%;

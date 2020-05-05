@@ -3,12 +3,13 @@
     background: rgb(248, 202, 0, 0.9) 0% 0% no-repeat padding-box;
 }
 
-.container-header:hover {
+/* .container-header:hover {
     background: rgb(248, 202, 0, 0.5) 0% 0% no-repeat padding-box;
-}
+} */
 
-.container-header h1 {
-    color: #490A3D;
+.container-header h1 a {
+    font-weight: bold;
+    font-size: 34px;
 }
 
 /* Containers */

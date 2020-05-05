@@ -38,9 +38,9 @@ h2 {
     background-color: rgb(232, 125, 2, 0.9);
 }
 
-.container-header:hover {
+/* .container-header:hover {
     background-color: rgb(232, 125, 2, 0.5);
-}
+} */
 
 .perfil-info {
     display: flex;

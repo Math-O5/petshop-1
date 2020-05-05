@@ -7,6 +7,9 @@
 a {
     text-decoration: none;
     color: unset;
+    font-size: 34px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container-header {
@@ -14,6 +17,7 @@ a {
     padding: 7vh 10vw;
     position: relative;
     font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 .container-header .background-header {
@@ -27,8 +31,9 @@ a {
     height: 100%;
 }
 
-.container-header h1 {
+.container-header h1 a {
     text-align: left;
     font-size: 34px;
     font-weight: 500;
+    font-family: 'Poppins', sans-serif;
 }

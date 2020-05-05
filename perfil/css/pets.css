@@ -26,12 +26,9 @@ h1{
     background-color: rgb(138, 155, 15, 0.9);
 }
 
-.container-header:hover {
+/* .container-header:hover {
     background-color: rgb(138, 155, 15, 0.5);
-}
-
-.container-header h1 {
-}
+} */
 
 .pets-container {
     padding: 20px 5vw;
