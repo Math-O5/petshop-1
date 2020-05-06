@@ -5,13 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/pets.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../public/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     <title>Produtos</title>
 </head>
 <body>
-    <header></header>
+    <header class="user">
+        <div class="main">
+            <a href="../home/home_geral.html"><img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" /></a>
+            <nav class="desktop">
+                <ul class="nav__links">
+                    <li><a href="../product/products.html">Nossos produtos</a></li>
+                    <li><a href="../service/services.html">Nossos serviços</a></li>
+                    <li><a href="../perfil/pets.html">Seus pets</a></li>
+                    <li><a href="../home/about.html">Sobre nós</a></li>
+                </ul>
+            </nav>
+            <nav class="mobile">
+                <img src="../assets/img/menu.svg" alt="menu" id="menu">
+                
+            </nav>
+            <nav class="user-area">
+                <a href="#">
+                    <p>User Name</p>
+                    <img src="../assets/img/user.svg" alt="user">
+                </a>
+                <a href="../perfil/carrinho.html">
+                    <img src="../assets/img/cart.svg" alt="carrinho">
+                </a>
+            </nav> 
+        </div>
+        <div class="second" id="secondBar">
+            <ul class="nav__links ul-mobile">
+                <li><a href="../product/products.html">Nossos produtos</a></li>
+                <li><a href="../service/services.html">Nossos serviços</a></li>
+                <li><a href="../perfil/pets.html">Seus pets</a></li>
+                <li><a href="../home/about.html">Sobre nós</a></li>
+            </ul>
+        </div>
+    </header>
     
     <div class="container">
         <div class="container-header">
@@ -124,29 +158,30 @@
         </div>
     </div>
 
-    <footer></footer>
+    <footer>
+        <div class="content">
+            <img src="https://via.placeholder.com/150x64" alt="Logo" class="logo" />
+            <div class="adress">
+                <p>Rua XXXXXX, 111</p>
+                <p>São Carlos, Sp</p>
+                <p>Brasil</p>
+            </div>
+            <div class="contact">
+                <p>+55 99 99999 9999</p>
+                <p>email@example.com</p>
+            </div>
+            <div class="social">
+                <img src="../assets/img/facebook.svg" alt="facebook link" >
+                <img src="../assets/img/instagram.svg" alt="instagram link" >
+                <img src="../assets/img/twitter.svg" alt="twitter link" >
+                <img src="../assets/img/linkedin.svg" alt="linkedin link" >
+            </div>
+        </div>
+        <p class="end">2020 web. Em desenvolvimento.</p>
+    </footer>
 
     <script>
-        const load = async() => {
-            // fetch header
-            await fetch("../public/header_user.html")
-                .then(response => {
-                    return response.text()
-                })
-                .then(data => {
-                    document.querySelector("header").innerHTML = data;
-                });
-
-            // fetch footer
-            await fetch("../public/footer.html")
-                .then(response => {
-                    return response.text()
-                })
-                .then(data => {
-                    document.querySelector("footer").innerHTML = data;
-                });
-
-
+        const load = () => {
             // menu show / hide
             var menu = document.getElementById("menu");
             var secondBar = document.getElementById("secondBar");
@@ -164,8 +199,8 @@
             })
             
         }
-        load();
 
+        load();
     </script>
 
     
