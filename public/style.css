@@ -14,13 +14,11 @@ html {
 }
 
 body {
-    /* display: flex; */
+    position: flex;
     flex-direction: column;
-    height: 100%;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
-
 .button {
     width: 220px;
     background: rgba(73, 10, 61, 1);
