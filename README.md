@@ -2,7 +2,7 @@
 
 
 <h2 style="color:#1589F0;">Desenvolvedores</h2>
-<p>Mathias Fernandes, n° 10734352<p>
+<p>Mathias Fernandes, n° 10734352</p>
 <p>Enrique Teles, n° 10724326</p>
 <p>Marcus Pará, n° 11031663</p>
 
