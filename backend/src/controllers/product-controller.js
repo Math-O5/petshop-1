@@ -1,3 +1,10 @@
+/**
+ * autor: Mathias Fernandes
+ * nusp: 10734352
+ * email pessoal: mathfern4@gmail.com
+ * emailUSP: mathfernandes@usp.br
+ */
+
 'use strict'
 
 const mongoose = require('mongoose');
@@ -7,7 +14,6 @@ const ValidationContract = require('../validators/validators');
 
 /**
  * @function getByPartnerHours
- * @route 
  * @param { JSON } req : no used
  * @param { JSON } res : send stats 200 ok or 500 fail. 
  * @return { JSON[] } res.data : All services 
@@ -79,7 +85,6 @@ exports.post = async(req, res, next) => {
         description: req.body.description,
         partner: req.body.partner,
         price: req.body.price,
-        filepath: req.body.filepath,
         hours: req.body.hours,
     } 
 
@@ -107,30 +112,8 @@ exports.post = async(req, res, next) => {
 };
 
 exports.put = async(req, res, next) => {
-    
-    const service = {
-        title: req.body.title,
-        slug: req.body.slug,
-        description: req.body.description,
-        partner: req.body.partner,
-        price: req.body.price,
-        filepath: req.body.filepath,
-        hours: req.body.hours,
-    } 
-
-    let contract = new ValidationContract();
-
-    contract.hasMinLen(service.title, 3, 'O nome do serviço tem que ter mais que 3 caracteres');
-
-    // If one fail, return error 400 and message
-    if(!contract.isValid()) {
-        return res.status(400).json({
-            message: contract.firstError().message,
-        })
-    }
-    
     try {
-        let data = await repositsitory.update(req.params.id, service)
+        let data = await repositsitory.update(req.params.id, req.params.body)
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -145,7 +128,7 @@ exports.delete = async(req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao deletar',
+            message: 'Falha ao deletar.',
         });
     }
 };
