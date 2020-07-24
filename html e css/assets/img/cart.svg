@@ -1,0 +1,9 @@
+<svg id="Page-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Artboard" transform="translate(-1091 -2003)">
+    <g id="shopping-cart" transform="translate(1092 2004)">
+      <circle id="Oval" cx="2" cy="2" r="2" stroke-width="2" transform="translate(5 18)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle id="Oval-2" data-name="Oval" cx="2" cy="2" r="2" transform="translate(17 18)" stroke-width="2" stroke="#000" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path id="Shape" d="M4.67,5H22l-1.68,8.39a2,2,0,0,1-2,1.61H7.75a2,2,0,0,1-2-1.74L4.23,1.74A2,2,0,0,0,2.25,0H0" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>
