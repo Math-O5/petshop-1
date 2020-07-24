@@ -1,11 +1,10 @@
 <h1>Pet Shop Online :dog: </h1>
 
 
-<h2 style="color:#1589F0;">Desenvolvedores</h2>
-<p>Mathias Fernandes, n° 10734352</p>
-<p>Enrique Teles, n° 10724326</p>
-<p>Marcus Pará, n° 11031663</p>
-
+<h2 style="color:#1589F0;">Desenvolvedores e Github</h2>
+<p>Enrique Teles,  <a href="https://github.com/enriqueteles">enriqueteles</a></p>
+<p>Marcus Pará, <a href="https://github.com/MarcusMedeiros99">MarcusMedeiros99</a></p>
+<p>Mathias Fernandes,  <a href="https://github.com/Math-O5/">Math-O5</a></p>
 ***
 
 <h2>Descrição</h2>
