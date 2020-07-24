@@ -1,0 +1,184 @@
+/* Header */
+.container-carrinho {
+    border: none;
+    opacity: 1;
+    padding: 10vh 10vw 1vh;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    color: #1D1D1D;
+}
+
+.container-carrinho h1 {
+    color: #490A3D;
+    text-align: left;
+    font-size: 34px;
+}
+
+.carrinho-content {
+    display: flex;
+    justify-content: stretch;
+    font-weight: lighter;
+}
+.carrinho-content div {
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+.carrinho-content .items {
+    width: 60vw;
+    min-height: 50vh;
+}
+.carrinho-content .resumo {
+    width: 35%;
+    height: 50vh;
+    margin-left: 3%;
+}
+
+.items {
+    overflow:hidden;
+    overflow-y:scroll;
+    height: 50vh;
+}
+
+.items table{
+    width: 100%;
+}
+
+.items table tr{
+    width: 100%;
+}
+
+.items table tr th {
+    background-color: #F6F6F6;
+    
+}
+
+table tr th,
+table tr td {
+    text-align: left;
+    padding-left: 5px;
+}
+.items table tr th:nth-child(1),
+.items table tr td:nth-child(1) {
+    width: 40%;
+}
+
+.items table tr td button {
+    background-color: #F6F6F6;
+    color: #490A3D;
+    border-style: none;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+}
+
+.items table tr td button:active {
+    font-size: 12px;
+}
+
+.items table tr td button:focus{
+    outline-style: none;
+}
+
+tr td input {
+    max-width: 20px;
+}
+.container-carrinho .frete {
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+.container-carrinho .frete input {
+    margin: 20px;
+    padding: 8px 5px;
+    height: 100%;
+}
+
+.frete ::placeholder {
+    padding-left: 5px;
+}
+.frete button {
+    background-color: #BD1550;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-style: none;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.container-carrinho .resumo {
+    padding: 2px 5px;
+    background-color: #F6F6F6;
+    font-size: 13px;
+}
+.resumo h2 {
+    font-weight: 500;
+}
+
+.resumo table {
+    width: 100%;
+    padding: 20px 0px;
+}
+.resumo table th{
+    padding-left: 0px;
+}
+.resumo table td{
+    text-align: right;
+}
+
+.resumo table.total {
+    padding: 20px 0px;
+    box-sizing: content-box;
+    border-width: 1px 0px;
+    border-style: solid;
+    font-size: 15px;
+}
+
+.resumo table.total th,
+.resumo table.total td {
+    font-weight: 700;
+    
+}
+.resumo form {
+    padding: 20px 0px;
+}
+.resumo form button{
+    width: 100%;
+    background-color: #BD1550;
+    padding: 10px;
+    box-sizing: border-box;
+    border-style: none;
+    border-radius: 21px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 7vh;
+    margin-bottom: 0;
+}
+@media (max-width: 700px) {
+    .carrinho-content {
+        display: flex;
+        flex-direction: column;
+    }
+    .carrinho-content .items {
+        overflow: scroll;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .carrinho-content .resumo {
+        width: 100%;
+        margin: 0px;
+    }
+    .container-carrinho .frete {
+        margin-top: 20px;
+    }
+    .container-carrinho .frete input {
+        margin-left: 0px;
+    }
+}

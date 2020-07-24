@@ -19,7 +19,7 @@ export default function Logon() {
                     <ul class="nav__links">
                         <li><Link to="/products">Nossos produtos</Link></li>
                         <li><Link to="/services">Nossos serviços</Link></li>
-                        <li><a href="../perfil/pets.html">Seus pets</a></li>
+                        <li><Link to="/pets">Seus pets</Link></li>
                         <li><Link to="/about">Sobre nós</Link></li>
                     </ul>
                 </nav>
@@ -28,20 +28,20 @@ export default function Logon() {
                     
                 </nav>
                 <nav class="user-area">
-                    <a href="../perfil/perfil.html">
+                    <Link to="/profile">
                         <p>User Name</p>
                         <img src={userImg} alt="user" />
-                    </a>
-                    <a href="../perfil/carrinho.html">
+                    </Link>
+                    <Link to="/cart">
                         <img src={cartImg} alt="carrinho" />
-                    </a>
+                    </Link>
                 </nav> 
             </div>
             <div class="second" id="secondBar">
                 <ul class="nav__links ul-mobile">
-                    <li><a href="../product/products.html">Nossos produtos</a></li>
-                    <li><a href="../service/services.html">Nossos serviços</a></li>
-                    <li><a href="../perfil/pets.html">Seus pets</a></li>
+                    <li><Link to="/products">Nossos produtos</Link></li>
+                    <li><Link to="/services">Nossos serviços</Link></li>
+                    <li><Link to="/pets">Seus pets</Link></li>
                     <li><Link to="/about">Sobre nós</Link></li>
                 </ul>
             </div>
