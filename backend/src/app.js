@@ -27,6 +27,8 @@ const Service = require('./models/service');
 const Product = require('./models/product');
 const User = require('./models/user');
 const Cart = require('./models/cart');
+const Pet = require('./models/pet');
+
 /**
  * Load Routes
  */ 
@@ -36,6 +38,7 @@ const routesUser = require('./routes/user');
 const routesProduct = require('./routes/product');
 const routesAdmin = require('./routes/admin');
 const routesCart = require('./routes/cart');
+const routesPet = require('./routes/pet');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -49,5 +52,6 @@ app.use('/product', routesProduct);
 app.use('/user', routesUser);
 app.use('/cart', routesCart);
 app.use('/admin', routesAdmin);
+app.use('/pet', routesPet);
 
 module.exports = app;
