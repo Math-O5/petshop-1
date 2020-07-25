@@ -26,7 +26,7 @@ mongoose.connect(db,  {
 const Service = require('./models/service');
 const Product = require('./models/product');
 const User = require('./models/user');
-    
+const Cart = require('./models/cart');
 /**
  * Load Routes
  */ 
@@ -35,6 +35,7 @@ const routesService = require('./routes/service');
 const routesUser = require('./routes/user');
 const routesProduct = require('./routes/product');
 const routesAdmin = require('./routes/admin');
+const routesCart = require('./routes/cart');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -46,6 +47,7 @@ app.use('/', routesApp);
 app.use('/service', routesService);
 app.use('/product', routesProduct);
 app.use('/user', routesUser);
+app.use('/cart', routesCart);
 app.use('/admin', routesAdmin);
 
 module.exports = app;

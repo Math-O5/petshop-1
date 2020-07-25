@@ -3,9 +3,11 @@
 const mongoose = require('mongoose');
 const authService = require('../services/auth-service');
 const User = mongoose.model('User');
+const Cart = mongoose.model('Cart');
 const bcrypt = require('bcryptjs');
 const ValidationContract = require('../validators/validators');
-const repositsitory = require('../repository/user-repository');
+const repository = require('../repository/user-repository');
+const repositoryCart = require('../repository/cart-repository');
 const Role = require('../helpers/role');
 
 mongoose.set('useFindAndModify', false);
@@ -19,7 +21,7 @@ mongoose.set('useFindAndModify', false);
  */
 exports.get = async(req, res, next) => {
     try {
-        const data = await repositsitory.get();
+        const data = await repository.get();
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -37,7 +39,7 @@ exports.get = async(req, res, next) => {
  */
 exports.getAdmins = async(req, res, next) => {
     try {
-        const data = await repositsitory.getAdmins();
+        const data = await repository.getAdmins();
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -64,54 +66,58 @@ exports.getByUsername = (req, res, next) => {
                 data: e
             });
         });
-}
-
+    }
+    
 /**
  * @route POST http://localhost:3001/users/newUser/register
  * @obj Register user
  * @acess public
  */
-exports.register = (req, res, next) => {
-    let role = Role.User;
-    const admin = User.findOne({token: req.body.token});
-
-    if(admin) {
-        if(admin && admin.role === Role.Admin) {
-            role = req.body.role;
+exports.register = async(req, res, next) => {
+    try {
+        // Validate Admin
+        let role = Role.User;
+        const admin = await User.findOne({token: req.body.token});
+        
+        if(admin) {
+            if(admin && admin.role === Role.Admin) {
+                role = req.body.role;
+            }
         }
-    }
-    
-    const user = { 
-        username: req.body.username, 
-        email: req.body.email, 
-        password: req.body.password,
-        cpassword: req.body.cpassword,
-        tel: req.body.tel,
-        born: req.body.born,
-        filepath: req.body.filepath,
-        address: req.body.address,
-        role: role,
-    };
-
-    let contract = new ValidationContract();
-
-    contract.isEmail(user.email, 'O email não é válido');
-    contract.hasMaxLen(user.username, 9, 'O username ultrapassou o limite de 9 caractes.');
-    contract.hasMinLen(user.username, 5, 'O username não tem menos de 5 caracteres.');
-    contract.hasMinLen(user.address, 10, 'O endereço não contém informações suficientes.');
-    contract.hasMinLen(user.password, 9, 'Senha muito curta');
-    contract.hasSpace(user.password, 'Espaço não é permitida na senha.');
-    contract.isEqual(user.password, user.cpassword, 'Senhas diferentes.');
-    contract.isDate(user.born, 'Data de nascimento inválida');
-
-    // If one fail, return error 400 and message
-    if(!contract.isValid()) {
-        return res.status(400).json({
-            message: contract.firstError().message,
-        })
-    }
-
-    User.
+        
+        // Validate Params
+        const user = { 
+            username: req.body.username, 
+            email: req.body.email, 
+            password: req.body.password,
+            cpassword: req.body.cpassword,
+            tel: req.body.tel,
+            born: req.body.born,
+            filepath: req.body.filepath,
+            address: req.body.address,
+            role: role,
+        };
+        
+        let contract = new ValidationContract();
+        
+        contract.isEmail(user.email, 'O email não é válido');
+        contract.hasMaxLen(user.username, 9, 'O username ultrapassou o limite de 9 caractes.');
+        contract.hasMinLen(user.username, 5, 'O username não tem menos de 5 caracteres.');
+        contract.hasMinLen(user.address, 10, 'O endereço não contém informações suficientes.');
+        contract.hasMinLen(user.password, 9, 'Senha muito curta');
+        contract.hasSpace(user.password, 'Espaço não é permitida na senha.');
+        contract.isEqual(user.password, user.cpassword, 'Senhas diferentes.');
+        contract.isDate(user.born, 'Data de nascimento inválida');
+        
+        // If one validation Fail, return error 400 and a message
+        if(!contract.isValid()) {
+            return res.status(400).json({
+                message: contract.firstError().message,
+            })
+        }
+        
+        // Check if username already exist in database
+        await User.
         findOne({username: user.username}).then(user => {
             if(user) {
                 return res.status(400).json({
@@ -119,8 +125,9 @@ exports.register = (req, res, next) => {
                 });
             }
         });
-
-    User.
+        
+        // Check if email already exist in database
+        await User.
         findOne({email: user.email}).then(user => {
             if(user) {
                 return res.status(400).json({
@@ -128,32 +135,40 @@ exports.register = (req, res, next) => {
                 });
             }
         });
-
+    
+        // Create Cart
+        const cart = await repositoryCart.create({
+            products: [],      
+        });
+        user.cartId = cart._id;
         
-    /** TODO: create carId */
-    // user.carId = adhjdADAdgaZCwan232hcui21bb;
-
-    const newUser = new User(user);
-
-    // hash passport
-    bcrypt.genSalt(global.SALT_NUMBER, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if(err)
-                throw err;
-            newUser.password = hash;
-            newUser.save()
-                .then(_ => {
-                    res.status(201).send({
-                        message: 'User cadastrado com sucesso!'
-                    });
-                }).catch(e =>  {
-                    return res.status(400).send({
-                        message: 'Falha ao cadastrar-se',
-                        data: e
+        const newUser = new User(user);
+        
+        // hash passport
+        bcrypt.genSalt(global.SALT_NUMBER, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if(err)
+                    throw err;
+                    newUser.password = hash;
+                    newUser.save()
+                    .then(_ => {
+                        res.status(201).send({
+                            message: 'User cadastrado com sucesso!'
+                        });
+                    }).catch(e =>  {
+                        return res.status(400).send({
+                            message: 'Falha ao cadastrar-se',
+                            data: e
+                        });
                     });
                 });
             });
+    } catch(e) {
+        return res.status(400).send({
+            message: 'Falha ao criar usuário',
+            data: e
         });
+    }
 };
 
 /**
@@ -161,18 +176,27 @@ exports.register = (req, res, next) => {
  * @obj Delete user
  * @acess private
  */
-exports.delete = (req, res, next) => {
+exports.delete = async(req, res, next) => {
     User
-        .findOneAndDelete(req.params.id)
-        .then(x => {
-            res.status(200).send({
-                message: 'Deletado'
-            });
-        }).catch(e => {
-            res.status(400).send({
-                message: 'Falha ao deletar',
-                data: e
-            });
+        .findById(req.params.id, (err, user) => {
+            if(err) {
+                return res.status(400).send({
+                    message: 'Falha ao deletar',
+                    e: err
+                });
+            } else if(!user) {
+                return res.status(404).send({
+                    message: 'Usuário não encontrado'
+                });
+            } else {
+                    repositoryCart.remove(user.cartId);
+                    user.remove();
+                    return res.status(200).send({
+                        message: 'Deletado',
+                        id: req.params.id,
+                    });
+            }
+
         });
 };
 
@@ -208,7 +232,7 @@ exports.authenticate = async(req, res, next) => {
         
         .then(isMatch => {
             if(isMatch) {
-                repositsitory.updateToken(user._id, token);
+                repository.updateToken(user._id, token);
                 res.status(201).send({
                         id: user._id,
                         username: user.username,

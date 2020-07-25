@@ -84,7 +84,6 @@ exports.post = async(req, res, next) => {
     } 
 
     let contract = new ValidationContract();
-
     contract.hasMinLen(service.title, 3, 'O nome do serviço tem que ter mais que 3 caracteres.');
 
     // If one fail, return error 400 and message

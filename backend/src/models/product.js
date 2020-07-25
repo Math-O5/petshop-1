@@ -8,14 +8,15 @@ const product = new Schema({
         type: String,
         required: [true, 'O título é obrigatório'],
         index: true,
-        trim: true
+        trim: true,
+        unique: [true, 'O titulo do produto já existe']
     },
     slug: {
         type: String,
         required: [true, 'O slug é obrigatório'],
         trim: true,
         index: true,
-        unique: true
+        unique: [true, 'Esse Slug já existe'],
     },
     description: {
         type: String,
