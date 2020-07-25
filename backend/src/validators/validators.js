@@ -33,7 +33,7 @@ ValidationContract.prototype.isLowerCase = (value , message) => {
 }
 
 ValidationContract.prototype.hasSpace = (value , message) => {
-    if (value.includes(" "))
+    if (value === undefined || value.includes(" "))
         errors.push({ message: message });
 }
 
@@ -44,6 +44,12 @@ ValidationContract.prototype.isEqual = (value , confirm, message) => {
 
 ValidationContract.prototype.isEmail = (value, message) => {
     var reg = new RegExp(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
+    if (value === undefined || !reg.test(value))
+        errors.push({ message: message });
+}
+
+ValidationContract.prototype.isDate = (value, message) => {
+    var reg = new RegExp(/^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/);
     if (!reg.test(value))
         errors.push({ message: message });
 }

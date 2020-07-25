@@ -14,11 +14,13 @@ const user = new Schema({
     username: {
         type: String, 
         required: [true, 'O usuername é obrigatório'],
+        index: true,
         trim: true
     },
     email: {
         type: String, 
         required: [true, 'O email é obrigatório'],
+        index: true,
         trim: true
     },
     password: {
@@ -27,6 +29,7 @@ const user = new Schema({
     }, 
     token: {
         type: String,
+        index: true,
     },
     role: {
         type: String,
@@ -48,7 +51,7 @@ const user = new Schema({
     }],
     carId: {
         type: String,
-        required: [true, 'O usuário não  tem carrinho']
+        required: [true, 'O usuário não tem carrinho']
     }
 });
 

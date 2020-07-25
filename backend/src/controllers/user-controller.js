@@ -36,12 +36,9 @@ exports.getByUsername = (req, res, next) => {
     User
         .findOne({
             username: req.params.username,
-            active: true
-        }, 'id username email address') 
+        }, 'id username email address role tel born petsId') 
         .then(data => {
-            return res.status(200).json({
-                data: data
-            });
+            return res.status(200).json(data);
         }).catch(e =>  {
             res.status(400).send({
                 message: 'Falha ao buscar user',
@@ -56,25 +53,28 @@ exports.getByUsername = (req, res, next) => {
  * @acess public
  */
 exports.register = (req, res, next) => {
-    let { 
-        username, 
-        email, 
-        password,
-        confirm_password,
-        address,
-        permissions,
-    } = req.body;
+    const user = { 
+        username: req.body.username, 
+        email: req.body.email, 
+        password: req.body.password,
+        cpassword: req.body.cpassword,
+        tel: req.body.tel,
+        born: req.body.born,
+        filepath: req.body.filepath,
+        address: req.body.address,
+        role: 'User',
+    };
 
     let contract = new ValidationContract();
 
-    contract.isEmail(email, 'O email não é válido');
-    contract.hasMaxLen(username, 9, 'O username ultrapassou o limite de 9 caractes.');
-    contract.hasMinLen(username, 5, 'O username não tem menos de 5 caracteres.');
-    contract.isLowerCase(username, 'O username não pode conter letras maiusculas.');
-    contract.hasMinLen(address, 10, 'O endereço não contém informações suficientes.');
-    contract.hasMinLen(password, 9, 'Senha muito curta');
-    contract.hasSpace(password, 'Espaço não é permitida na senha.');
-    contract.isEqual(password, confirm_password, 'Senhas diferentes.');
+    contract.isEmail(user.email, 'O email não é válido');
+    contract.hasMaxLen(user.username, 9, 'O username ultrapassou o limite de 9 caractes.');
+    contract.hasMinLen(user.username, 5, 'O username não tem menos de 5 caracteres.');
+    contract.hasMinLen(user.address, 10, 'O endereço não contém informações suficientes.');
+    contract.hasMinLen(user.password, 9, 'Senha muito curta');
+    contract.hasSpace(user.password, 'Espaço não é permitida na senha.');
+    contract.isEqual(user.password, user.cpassword, 'Senhas diferentes.');
+    contract.isDate(user.born, 'Data de nascimento inválida');
 
     // If one fail, return error 400 and message
     if(!contract.isValid()) {
@@ -84,7 +84,7 @@ exports.register = (req, res, next) => {
     }
 
     User.
-        findOne({username: username}).then(user => {
+        findOne({username: user.username}).then(user => {
             if(user) {
                 return res.status(400).json({
                     message: 'Username já foi escolhido.'
@@ -93,7 +93,7 @@ exports.register = (req, res, next) => {
         });
 
     User.
-        findOne({email: email}).then(user => {
+        findOne({email: user.email}).then(user => {
             if(user) {
                 return res.status(400).json({
                     message: 'Email já foi registrado.'
@@ -101,11 +101,14 @@ exports.register = (req, res, next) => {
             }
         });
 
-    
-    let newUser = new User({username, password, email, address, permissions});
+        
+    /** TODO: create carId */
+    user.carId = 'adhjdADAdgaZCwan232hcui21bb';
+
+    const newUser = new User(user);
 
     // hash passport
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(global.SALT_NUMBER, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if(err)
                 throw err;
@@ -145,11 +148,11 @@ exports.login = (req, res, next) => {
                       if(isMatch) {
                           
                         // return token
-                        let data = {
+                        const data = {
                             username: user.username,
                             email: user.email,
                         }
-                         res.status(200).send({
+                        res.status(200).send({
                             data: data,
                             sucess: true,
                             message: 'acesso liberado',
@@ -197,55 +200,59 @@ exports.delete = (req, res, next) => {
  * */ 
 exports.authenticate = async(req, res, next) => {
     try {
-        // Find the client by email
+        // Find the user by email
         const user = await User.findOne({ 
             email: req.body.email,
         }); 
         
-        /**
-         * if no client was found then error
-         */
+        // if no user was found then error
         if(!user) {
             res.status(404).send({
                 message: 'Email inválido',
             });
             return;
         }
-    
+        
+        // Generate token
         const token = await authService.generateToken({
-            id: user._id,
-            email: user.email,
-            username: user.username
+            "id": user._id,
+            "email": user.email,
+            "username": user.username
         });
         
-        bcrypt.compare(req.body.password, user.password) // compare passwords
+        // Compare passwords
+        bcrypt.compare(req.body.password, user.password) 
+        
         .then(isMatch => {
             if(isMatch) {
+                repositsitory.updateToken(user._id, token);
                 res.status(201).send({
                         id: user._id,
                         username: user.username,
                         email: user.email,
                         address: user.address,
                         token: token,
+                        role: user.role,
                         sucess: true,
                         message: 'Acesso liberado!'
                     });
                 } else {
                     res.status(400).send({
                         message: 'Senha ou Usuários incorretos.',
-                        sucess: false,
+                        sucess: false
                     });
                 }
             }).catch(err => {
                 res.status(400).send({
                     message: 'Senha ou Usuários incorretos.',
                     sucess: false,
-                    data: user,
+                    data: user
                 });
             });
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao autenticar user',
+            message: 'Falha ao autenticar user'
         });
     }
 };
+
