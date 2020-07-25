@@ -21,13 +21,17 @@ import About from './pages/About';
 import Products from './pages/Products';
 import ProductInfo from './pages/ProductInfo';
 import Services from './pages/Services';
+import ServiceInfo from './pages/ServiceInfo';
+import Profile from './pages/Profile';
+import Pets from './pages/Pets';
+import Cart from './pages/Cart';
 
 export const PrivateRoute = ({ indicator, components, ...rest }) => (
     <Route
       {...rest}
       render={(props) => {
         // const userData = Auth.isAuthenticated();
-        const indicator = parseInt(1); // mudar dps
+        const indicator = parseInt(0); // mudar dps
         // if (!userData || !components[indicator]) {
         //   return (
         //     <Redirect
@@ -74,7 +78,7 @@ function App() {
                   }}
                   exact
                 ></PrivateRoute>
-                
+
                 <PrivateRoute
                   path={routes.about}
                   components={{
@@ -110,6 +114,46 @@ function App() {
                   components={{
                     0: Services,
                     1: Services,
+                    2: NotSet
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.servicesInfo}
+                  components={{
+                    0: ServiceInfo,
+                    1: ServiceInfo,
+                    2: NotSet
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.profile}
+                  components={{
+                    0: NotSet,
+                    1: Profile,
+                    2: NotSet
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.pets}
+                  components={{
+                    0: NotSet,
+                    1: Pets,
+                    2: NotSet
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.cart}
+                  components={{
+                    0: NotSet,
+                    1: Cart,
                     2: NotSet
                   }}
                   exact

@@ -1,0 +1,23 @@
+
+.pet {
+    display: flex;
+    flex-grow: 1;
+    margin: 15px;
+    background-color: #8A9B0F21;
+}
+.pet h2 {
+    font-size: 29px;
+    font-weight: 700;
+}
+
+.pet img {
+    margin: 20px;
+    max-width: 150px;
+    max-height: 200px;
+}
+
+.pet p {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8A98BA;
+}

@@ -12,7 +12,7 @@ export default function Logon() {
     return (
         <header class="geral">
             <div class="main">
-                <img src={logoImg} alt="Logo" class="logo" />
+                <Link to="/"><img src={logoImg} alt="Logo" class="logo" /></Link>
                 <nav class="mobile">
                     <img src={menuImg} alt="menu" id="menu" />
                     
@@ -23,7 +23,7 @@ export default function Logon() {
                             <ul class="nav__links">
                                 <li><Link to="/about">Sobre nós</Link></li>
                                 <li><Link to="/products">Nossos produtos</Link></li>
-                                <li><a href="../service/services.html">Nossos serviços</a></li>
+                                <li><Link to="/services">Nossos serviços</Link></li>
                             </ul>
                         </ul>
                     </nav>
@@ -34,9 +34,9 @@ export default function Logon() {
             </div>
             <div class="second" id="secondBar">
                 <ul class="nav__links ul-mobile">
-                    <li><a href="../product/products.html">Nossos produtos</a></li>
-                    <li><a href="../service/services.html">Nossos serviços</a></li>
-                    <li><a href="../home/about.html">Sobre nós</a></li>
+                    <li><Link to="/products">Nossos produtos</Link></li>
+                    <li><Link to="/services">Nossos serviços</Link></li>
+                    <li><Link to="about">Sobre nós</Link></li>
                 </ul>
             </div>
 
