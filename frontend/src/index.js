@@ -11,6 +11,7 @@ import routes from './routes';
 // componentes
 import HeaderGeral from './components/HeaderGeral';
 import HeaderUser from './components/HeaderUser';
+import HeaderAdmin from './components/HeaderAdmin';
 import Footer from './components/Footer';
 
 // paginas
@@ -25,13 +26,23 @@ import ServiceInfo from './pages/ServiceInfo';
 import Profile from './pages/Profile';
 import Pets from './pages/Pets';
 import Cart from './pages/Cart';
+//admin
+import AdminAdmins from './pages/AdminAdmins';
+import AdminAdminsInfo from './pages/AdminAdminsInfo';
+import AdminClients from './pages/AdminClients';
+import AdminClientsInfo from './pages/AdminClientsInfo';
+import AdminProducts from './pages/AdminProducts';
+import AdminProductsInfo from './pages/AdminProductsInfo';
+import AdminProfit from './pages/AdminProfit';
+import AdminServices from './pages/AdminServices';
+import AdminServicesInfo from './pages/AdminServicesInfo';
 
 export const PrivateRoute = ({ indicator, components, ...rest }) => (
     <Route
       {...rest}
       render={(props) => {
         // const userData = Auth.isAuthenticated();
-        const indicator = parseInt(0); // mudar dps
+        const indicator = parseInt(1); // mudar dps
         // if (!userData || !components[indicator]) {
         //   return (
         //     <Redirect
@@ -64,7 +75,7 @@ function App() {
                 components={{
                 0: HeaderGeral,
                 1: HeaderUser,
-                2: NotSet
+                2: HeaderAdmin
                 }}
             ></PrivateRoute>
 
@@ -94,7 +105,7 @@ function App() {
                   components={{
                     0: Products,
                     1: Products,
-                    2: NotSet
+                    2: AdminProducts
                   }}
                   exact
                 ></PrivateRoute>
@@ -104,7 +115,7 @@ function App() {
                   components={{
                     0: ProductInfo,
                     1: ProductInfo,
-                    2: NotSet
+                    2: AdminProductsInfo
                   }}
                   exact
                 ></PrivateRoute>
@@ -114,7 +125,7 @@ function App() {
                   components={{
                     0: Services,
                     1: Services,
-                    2: NotSet
+                    2: AdminServices
                   }}
                   exact
                 ></PrivateRoute>
@@ -124,7 +135,7 @@ function App() {
                   components={{
                     0: ServiceInfo,
                     1: ServiceInfo,
-                    2: NotSet
+                    2: AdminServicesInfo
                   }}
                   exact
                 ></PrivateRoute>
@@ -155,6 +166,56 @@ function App() {
                     0: NotSet,
                     1: Cart,
                     2: NotSet
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.clients}
+                  components={{
+                    0: NotSet,
+                    1: NotSet,
+                    2: AdminClients
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.clientsInfo}
+                  components={{
+                    0: NotSet,
+                    1: NotSet,
+                    2: AdminClientsInfo
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.admins}
+                  components={{
+                    0: NotSet,
+                    1: NotSet,
+                    2: AdminAdmins
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.adminsInfo}
+                  components={{
+                    0: NotSet,
+                    1: NotSet,
+                    2: AdminAdminsInfo
+                  }}
+                  exact
+                ></PrivateRoute>
+
+                <PrivateRoute
+                  path={routes.profit}
+                  components={{
+                    0: NotSet,
+                    1: NotSet,
+                    2: AdminProfit
                   }}
                   exact
                 ></PrivateRoute>

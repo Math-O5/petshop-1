@@ -1,0 +1,176 @@
+.button {
+    width: 220px;
+    background: rgba(73, 10, 61, 1);
+    color: white;
+    border: 0;
+    height: 60px;
+    border-radius: 100px;
+    font-weight: 700;
+    margin-top: 16px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 60px;
+    transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+    background-color: rgba(73, 10, 61, 0.8);
+}
+
+li, a, button {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    font: Bold 14px Montserrat;
+    letter-spacing: 0.95px;
+    color: rgba(73, 10, 61, 1);
+}
+
+main#admin {
+    margin: 5px 10vw;
+}
+
+main#admin .title {
+    display: flex;
+    margin: 50px 0;
+}
+
+main#admin .title h1 {
+    margin-right: auto;
+}
+main#admin .title a {
+    margin-left: auto;
+    vertical-align: middle;
+}
+
+main#admin .title button {
+    text-align: center;
+    margin: 0;
+}
+
+main#admin .filter {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    border: none;
+}
+
+main#admin .filter input {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    font: 400 16px Roboto, sans-serif;
+    padding: 0 24px;
+}
+
+main#admin .filter select {
+    height: 40px;
+    margin-left: 10px;
+    padding: 0 24px;
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #dcdce6;
+    border-radius: 8px;
+    font: 400 16px Roboto, sans-serif;
+}
+
+
+main#admin table {
+    width: 100%;
+    font: 500 14px Poppins;
+    margin-bottom: 100px;
+    border-spacing:0 5px;
+}
+
+main#admin tr {
+    height: 40px;
+    font: 500 16px Poppins;
+    box-shadow: 0px 3px 6px #00000024;
+    border-radius: 5px;
+}
+
+main#admin tbody tr {
+    cursor: pointer;
+}
+
+main#admin table tbody a {
+    display: block;
+}
+
+main#admin table td {
+    padding-left: 20px;
+}
+
+main#admin table thead {
+    background-color: #f6f6f6;
+}
+
+main#admin table tbody tr {
+    background-color: #fff;
+}
+
+/* id */
+main#admin .row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-bottom: 5px;
+}
+
+main#admin p:nth-child(1) {
+    font: 500 18px Poppins;
+}
+
+main#admin p:nth-child(2) {
+    font: 400 18px Poppins;
+    margin-left: 10px;
+}
+
+main#admin .row a {
+    width: 100%;
+    display: flex;
+}
+    
+main#admin .row a {
+    border-radius: 20px;
+    margin: 20px 0;
+    flex-grow: 1;
+    width: 50%;
+}
+main#admin .row button {
+    width: 100%;
+}
+
+main#admin .row a:nth-child(2) {
+    margin-left: 20px;
+}
+
+main#admin .row button.edit {
+    background-color: rgb(17, 175, 17);
+    /* width: 50%; */
+}
+
+main#admin .row button.delete {
+    background-color: rgb(175, 17, 17);
+}
+
+/* add */
+main#admin .info input {
+    height: 30px;
+    margin-left: 10px;
+    border: 1px solid #dcdce6;
+    border-radius: 5px;
+    font: 400 16px Roboto, sans-serif;
+    padding: 0 24px;
+}
+
+main#admin .row button.add {
+    width: 100%;
+    background-color: rgb(17, 175, 17);
+}
+
