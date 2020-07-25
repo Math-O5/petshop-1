@@ -1,19 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 import bannerMainImg from '../../images/banner_main.png';
 import dogBannerImg from '../../images/dog_banner.png';
-import productImg from '../../images/product.jpg';
 import arrowImg from '../../images/arrow.png';
 
 // componentes
 import ProductItem from '../../components/ProductItem';
-
+import Loading from '../../components/Loading';
 
 export default function Logon() {
     const history = useHistory();
+    
+    const [products, setProducts] = useState([]);
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(false);
+    
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const responseProducts = await axios.get("/product");
+                setProducts(responseProducts.data);
+                
+                const responseServices = await axios.get("/service");
+                setServices(responseServices.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <main>
@@ -40,10 +64,10 @@ export default function Logon() {
                     <a href="../product/product_detail.html"><img src={arrowImg} alt="enter" /></a>
                 </div>
                 <div className="preview">
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
+                    {loading && (<Loading />)}
+                    {products.slice(0,Math.min(products.length, 5)).map(product => (
+                        <ProductItem data={product}/>
+                    ))}
                 </div>
             </section>
 
@@ -57,14 +81,15 @@ export default function Logon() {
                     </a>
                 </div>
                 <div className="preview">
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
-                    <ProductItem />
+                    {loading && (<Loading />)}
+                    {services.slice(0,Math.min(services.length, 5)).map(product => (
+                        <ProductItem data={product}/>
+                    ))}
                 </div>
             </section>
 
 
         </main>
+
     );
 }

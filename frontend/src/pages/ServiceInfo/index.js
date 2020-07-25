@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import serviceImg from '../../images/dog.png';
+import Loading from '../../components/Loading';
 
-
-export default function Logon() {
+export default function Logon(props) {
     const history = useHistory();
+
+    const serviceId = props.match.params.id;
+
+    const [service, setService] = useState({});
+    const [loading, setLoading] = useState(false);
+    
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`/service/${serviceId}`);
+                setService(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <div class="container">
@@ -24,22 +47,21 @@ export default function Logon() {
 
                     </div>
                     <div class="text-services-detail">
-                        <h2>Tosa</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit culpa odit possimus magni natus iste ipsum beatae qui ad consectetur deserunt necessitatibus, libero, accusantium esse eum accusamus eius architecto a?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut sequi, omnis excepturi quisquam, ducimus atque eligendi molestiae animi pariatur corrupti, tempora dicta perspiciatis nihil ea. Ullam molestias inventore magni corrupti.
-                        </p>
+                        <h2>{service.title}</h2>
+                        <p>{service.description}</p>
                     </div>
                     <div class="schedule-services">
                         <p>AGENDE SOMENTE POR:</p>
-                        <h2 id="price">R$ 15.00</h2>
+                        <h2 id="price">R$ {service.price}</h2>
                         <p>Apenas à vista</p>
                         <label>Data: 
                             <input id="data" type="date"></input>
                         </label>
                         <label>Hora: 
                             <select id="hora" name="hora">
-                                <option value="1">12:00</option>
-                                <option value="2">13:00</option>
+                                {service.hours && service.hours.map((hour, index) => (
+                                    <option value={index}>{hour}:00</option>
+                                ))}
                             </select>  
                         </label>
                         
@@ -51,8 +73,8 @@ export default function Logon() {
             <div class="details-container">
                 <h2>Detalhes</h2>
                 <br/>
-                <p>Duração: 2 horas</p>
-                <p>Descrição: Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quos qui delectus eaque architecto laboriosam quod quidem magni, voluptates nemo distinctio veritatis consequatur sequi exercitationem dolores libero, fugit fuga cupiditate.</p>
+                <p>Duração: 2 horas ADD NO MODEL</p>
+                <p>Descrição: {service.description}</p>
                 <br/>
             </div>
         </div>

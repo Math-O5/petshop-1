@@ -5,21 +5,19 @@ import './styles.css';
 
 import productImg from '../../images/product.jpg';
 
-export default function Logon() {
+export default function Logon({
+    data
+}) {
     const history = useHistory();
 
     return (
         <div className="product">
-            <Link to="/products/info">
+            <Link to={`/products/${data._id}`}>
                 <img src={productImg} alt="Produto" />
                 <div className="product-description">
-                    <h2>Ração</h2>
-                    <span>R$50,00</span>
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-
+                    <h2>{data.title}</h2>
+                    <span>R${data.price}</span>
+                    <p>{data.description}</p>
                 </div>
             </Link>
             
