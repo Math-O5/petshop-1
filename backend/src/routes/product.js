@@ -1,23 +1,18 @@
-
-/**
- * autor: Mathias Fernandes
- * nusp: 10734352
- * email pessoal: mathfern4@gmail.com
- * emailUSP: mathfernandes@usp.br
- */
-
 'use strict'
 
 const express = require('express');
-const controllerServices = require('../controllers/service-controller');  
+const controllerProducts = require('../controllers/product-controller');  
 const router = express.Router();
+const authService = require('../services/auth-service');
+const Role = require('../helpers/role');
 
-router.get('/', controllerServices.get);
-router.get('/:id', controllerServices.getById);
-router.get('/slug/:slug', controllerServices.getBySlug);
-router.get('/partner/hours/', controllerServices.getByPartnerHours);
-router.post('/', controllerServices.post);
-router.put('/:id', controllerServices.put);
-router.delete('/:id', controllerServices.delete);
+router.get('/', controllerProducts.get);
+router.get('/:id', controllerProducts.getById);
+router.get('/slug/', controllerProducts.getBySlug);
+router.get('/type/:type', controllerProducts.getByType);
+router.post('/', authService.authorize(Role.Admin), controllerProducts.post);
+router.put('/', authService.authorize(Role.Admin), controllerProducts.put);
+router.delete('/', authService.authorize(Role.Admin), controllerProducts.delete);
 
 module.exports = router;
+

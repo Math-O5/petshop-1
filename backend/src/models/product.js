@@ -7,6 +7,7 @@ const product = new Schema({
     title: {
         type: String,
         required: [true, 'O título é obrigatório'],
+        index: true,
         trim: true
     },
     slug: {
@@ -40,6 +41,6 @@ const product = new Schema({
         type: String,
         required: true
     }]
-});
+}, { timestamps: true });
  
 module.exports = mongoose.model('Product', product);

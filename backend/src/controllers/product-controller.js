@@ -1,96 +1,77 @@
-/**
- * autor: Mathias Fernandes
- * nusp: 10734352
- * email pessoal: mathfern4@gmail.com
- * emailUSP: mathfernandes@usp.br
- */
-
 'use strict'
 
 const mongoose = require('mongoose');
-const Service = mongoose.model('Service');
-const repositsitory = require('../repository/service-repository');
+const Product = mongoose.model('Product');
+const repository = require('../repository/product-repository');
 const ValidationContract = require('../validators/validators');
 
-/**
- * @function getByPartnerHours
- * @param { JSON } req : no used
- * @param { JSON } res : send stats 200 ok or 500 fail. 
- * @return { JSON[] } res.data : All services 
- */
 exports.get = async(req, res, next) => {
     try {
-        const data = await repositsitory.get();
+        let data = await repository.get()
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao busca serviços',
+            message: 'Falha ao busca produtos',
         });
     }
 }
 
 exports.getById = async(req, res, next) => {
     try {
-        const data = await repositsitory.getById(req.params.id);
+        let data = await repository.getById(req.params.id) 
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao buscar serviço',
+            message: 'Falha ao buscar produto',
         });
     }       
 }
 
-/**
- * @function getBySlug
- * @param { JSON } req : requisição pelo url
- * @param { JSON } res : registros encontrados
- */
 exports.getBySlug = async(req, res, next) => {
     try {
-        let data = await repositsitory.getBySlug(req.params.slug)
+        const data = await repository.getBySlug(req.body.slug)
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao buscas serviços',
+            message: 'Falha ao buscas produtos',
         });
     }
 }
 
-/**
- * @function getByPartnerHours
- * @param { JSON } req : requisição no body em forma {"name": "braga", "hours": [11, 16]}
- * @param { JSON } res : registros encontrados
- */
-exports.getByPartnerHours = async(req, res, next) => {
+exports.getByType = async(req, res, next) => {
     try {
-        let data = await repositsitory.getByPartnerHours(req.body);
+        const data = await repository.getByType(req.params.type);
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao buscas serviços',
+            message: 'Falha ao buscas produtos',
         });
     }
 }
 
-/**
- * @function post
- * @param { JSON } req : requisição no body em forma { title: "Tosa radical", slug: "tosa-radical", description: "Tosa bem curta", partner: "Luis Braga", price: 120.45, hours: [10, 11, 14, 15, 16]
- * @param { JSON } res : registros encontrados
- */
 exports.post = async(req, res, next) => {
+    let contract = new ValidationContract();
 
-    const service = {
+    const product = {
         title: req.body.title,
         slug: req.body.slug,
         description: req.body.description,
-        partner: req.body.partner,
+        filepath: req.body.filepath,
         price: req.body.price,
-        hours: req.body.hours,
-    } 
+        quantityStore: req.body.quantityStore,
+        quantitySold: req.body.quantitySold,
+        type: req.body.type,
+    }
 
-    let contract = new ValidationContract();
-
-    contract.hasMinLen(service.title, 3, 'O nome do serviço tem que ter mais que 3 caracteres.');
+    contract.hasMinLen(product.title, 3, 'O nome do produto é muito curto. No mínimo 3 caracteres');
+    contract.hasMinLen(product.slug, 3, 'O slug é muito curto. No mínimo 3 caracteres');
+    contract.hasMinLen(product.description, 3, 'A descrição é muito curta. No mínimo 3 caracteres');
+    contract.hasSpace(product.slug, 'O Slug não pode haver espaçoes');
+    contract.isNumber(product.quantityStore, 'A quantidade em estoque deve ser um número');
+    contract.isNumber(product.quantitySold, 'A quantidade vendida deve ser um número');
+    contract.isNumber(product.price, 'O valor é um número');
+    contract.hasMinValue(product.quantityStore, 0, 'O estoque já está vazio');
+    contract.hasMinValue(product.quantitySold, 0, 'O estoque já está vazio');
 
     // If one fail, return error 400 and message
     if(!contract.isValid()) {
@@ -98,37 +79,37 @@ exports.post = async(req, res, next) => {
             message: contract.firstError().message,
         })
     }
-
+  
     try {
-        let data = await repositsitory.create(service);
+        let data = await repository.create(product)
         res.status(201).send({
-            message: 'Service cadastrado com sucesso!'
+            message: 'Produto cadastrado com sucesso!'
         });
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao cadastrar serviço',
+            message: 'Falha ao cadastrar produto',
         });
     }
 };
 
 exports.put = async(req, res, next) => {
     try {
-        let data = await repositsitory.update(req.params.id, req.params.body)
-        res.status(200).send(data);
+        let data = await repository.update(req.params.id, req.params.body)
+        res.status(200).send({data});
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao cadastrar serviço',
+            message: 'Falha ao cadastrar produto',
         });
     }
 };
 
 exports.delete = async(req, res, next) => {
     try {
-        let data = await repositsitory.delete(req.params.id) 
-        res.status(200).send(data);
+        let data = await repository.delete(req.params.id) 
+        res.status(200).send({data});
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao deletar.',
+            message: 'Falha ao atualizar.',
         });
     }
 };

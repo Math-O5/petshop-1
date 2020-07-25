@@ -7,6 +7,11 @@ function ValidationContract() {
     errors = [];
 }
 
+ValidationContract.prototype.isNumber = (value, message) => {
+    if (typeof value !== 'number')
+        errors.push({ message: message });
+}
+
 ValidationContract.prototype.isRequired = (value, message) => {
     if (!value || value.length <= 0)
         errors.push({ message: message });
@@ -19,6 +24,16 @@ ValidationContract.prototype.hasMinLen = (value, min, message) => {
 
 ValidationContract.prototype.hasMaxLen = (value, max, message) => {
     if (!value || value.length > max)
+        errors.push({ message: message });
+}
+
+ValidationContract.prototype.hasMinValue = (value, min, message) => {
+    if (typeof value !== 'number' || value < min)
+        errors.push({ message: message });
+}
+
+ValidationContract.prototype.hasMaxValue = (value, max, message) => {
+    if (typeof value !== 'number' || value > max)
         errors.push({ message: message });
 }
 
