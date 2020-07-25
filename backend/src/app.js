@@ -39,6 +39,8 @@ const User = require('./models/user');
  */ 
 const routesApp = require('./routes/index');
 const routesService = require('./routes/service');
+const routesUser = require('./routes/user');
+const routesProduct = require('./routes/product');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -48,7 +50,7 @@ app.use(bodyParser.urlencoded({extended : false}));
  */
 app.use('/', routesApp);
 app.use('/service', routesService);
-app.use('/product', routesService);
-app.use('/user', routesService);
+app.use('/product', routesProduct);
+app.use('/user', routesUser);
 
 module.exports = app;

@@ -28,6 +28,10 @@ const service = new Schema({
         type: Number,
         required: [true, 'O preço é obrigatório']
     },
+    filepath: {
+        type:String,
+        Required: [true, 'A imagem é obrigatória']
+    },
     hours: [{
         type: String,
         required: true
