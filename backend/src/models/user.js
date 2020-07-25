@@ -35,6 +35,10 @@ const user = new Schema({
         type: String,
         required: [true, 'Especifique o tipo de usuário']
     }, 
+    address: {
+        type: String,
+        required: [true, 'A localização é obrigatória'],
+    },
     tel: {
         type: String, 
     },
@@ -50,10 +54,10 @@ const user = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Pet"
     }],
-    carId: {
+    cartId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cart",
-        // required: [true, 'O usuário não tem carrinho']
+        required: [true, 'O usuário não tem carrinho']
     },
 }, { timestamps: true });
 

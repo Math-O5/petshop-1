@@ -18,7 +18,7 @@ const generateToken = async(data) => {
  * @retrun data
  */
 const decodeToken = async(token) => {
-    let data = await jwt.verify(token, global.SALT_KEY);
+    const data = await jwt.verify(token, global.SALT_KEY);
     return data;
 }
 
@@ -48,10 +48,15 @@ function authorize(role = []) {
             } 
             
             const user = await User.findOne({token: token});
-            
+            if(!user) {
+                return res.status(401).json({ 
+                    message: 'Token inválido' 
+                });
+            }
+
             if (role.length && !role.includes(user.role)) {
                 return res.status(401).json({ 
-                            a: user._id,
+                            id: user._id,
                             user: user.role,
                             message: 'Não autorizado' 
                         });

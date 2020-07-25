@@ -4,12 +4,12 @@ const express = require('express');
 const authService = require('../services/auth-service');
 const controllerUsers = require('../controllers/user-controller');  
 const Role = require('../helpers/role');
-const router = express.Router();
+const userRouter = express.Router();
 
-router.get('/', authService.authorize(Role.Admin), controllerUsers.get);
-router.get('/:username',  authService.authorize(), controllerUsers.getByUsername);
-router.delete('/delete/:id', authService.authorize(), controllerUsers.delete);
-router.post('/new/register', controllerUsers.register);
-router.post('/login', controllerUsers.authenticate);
+userRouter.get('/', controllerUsers.get);
+userRouter.get('/:username',  authService.authorize(), controllerUsers.getByUsername);
+userRouter.delete('/delete/:id',  authService.authorize(), controllerUsers.delete);
+userRouter.post('/new/register', controllerUsers.register);
+userRouter.post('/login', controllerUsers.authenticate);
 
-module.exports = router;
+module.exports = userRouter;
