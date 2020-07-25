@@ -1,10 +1,3 @@
-/**
- * autor: Mathias Fernandes
- * nusp: 10734352
- * email pessoal: mathfern4@gmail.com
- * emailUSP: mathfernandes@usp.br
- */
-
 'use strict'
 
 const mongoose = require('mongoose');
@@ -40,12 +33,11 @@ exports.getById = async(id) => {
     return res;
 }
 
-exports.getByTag = async(tag) => {
+exports.getByType = async(type) => {
     const res = await Service
         .find({
-            tags: tag,
-            active: true
-        }, 'title description slug price tags');
+            type: type,
+        });
     return res;
 } 
 

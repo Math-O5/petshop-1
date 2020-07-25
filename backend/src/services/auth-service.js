@@ -35,7 +35,7 @@ function authorize(role = []) {
     }
 
     return [
-        (req, res, next) => {
+        async(req, res, next) => {
             
             // Load token
             const token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -47,11 +47,13 @@ function authorize(role = []) {
                 });
             } 
             
-            const user = User.find({token: token})
+            const user = await User.findOne({token: token});
             
             if (role.length && !role.includes(user.role)) {
                 return res.status(401).json({ 
-                            message: 'Não autorizado.' 
+                            a: user._id,
+                            user: user.role,
+                            message: 'Não autorizado' 
                         });
             }
 
@@ -64,7 +66,7 @@ function authorize(role = []) {
                 } else {
                 next();
                 }
-            })
+            });
         }
     ];
 }

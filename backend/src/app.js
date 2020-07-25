@@ -1,10 +1,3 @@
-/**
- * autor: Mathias Fernandes
- * nusp: 10734352
- * email pessoal: mathfern4@gmail.com
- * emailUSP: mathfernandes@usp.br
- */
-
 'use strict'
 
 const express = require('express');
@@ -33,7 +26,7 @@ mongoose.connect(db,  {
 const Service = require('./models/service');
 const Product = require('./models/product');
 const User = require('./models/user');
-
+    
 /**
  * Load Routes
  */ 
@@ -41,6 +34,7 @@ const routesApp = require('./routes/index');
 const routesService = require('./routes/service');
 const routesUser = require('./routes/user');
 const routesProduct = require('./routes/product');
+const routesAdmin = require('./routes/admin');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -52,5 +46,6 @@ app.use('/', routesApp);
 app.use('/service', routesService);
 app.use('/product', routesProduct);
 app.use('/user', routesUser);
+app.use('/admin', routesAdmin);
 
 module.exports = app;

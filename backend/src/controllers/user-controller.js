@@ -6,6 +6,7 @@ const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
 const ValidationContract = require('../validators/validators');
 const repositsitory = require('../repository/user-repository');
+const Role = require('../helpers/role');
 
 mongoose.set('useFindAndModify', false);
 
@@ -22,7 +23,25 @@ exports.get = async(req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao busca serviços',
+            message: 'Falha ao busca usuários',
+        });
+    }
+}
+
+/**
+ * @function get
+ * @route 
+ * @param { JSON } req : no used
+ * @param { JSON } res : send stats 200 ok or 500 fail. 
+ * @return { JSON[] } res.data : All services 
+ */
+exports.getAdmins = async(req, res, next) => {
+    try {
+        const data = await repositsitory.getAdmins();
+        res.status(200).send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: 'Falha ao busca usuários',
         });
     }
 }
@@ -53,6 +72,15 @@ exports.getByUsername = (req, res, next) => {
  * @acess public
  */
 exports.register = (req, res, next) => {
+    let role = Role.User;
+    const admin = User.findOne({token: req.body.token});
+
+    if(admin) {
+        if(admin && admin.role === Role.Admin) {
+            role = req.body.role;
+        }
+    }
+    
     const user = { 
         username: req.body.username, 
         email: req.body.email, 
@@ -62,7 +90,7 @@ exports.register = (req, res, next) => {
         born: req.body.born,
         filepath: req.body.filepath,
         address: req.body.address,
-        role: 'User',
+        role: role,
     };
 
     let contract = new ValidationContract();
@@ -103,7 +131,7 @@ exports.register = (req, res, next) => {
 
         
     /** TODO: create carId */
-    user.carId = 'adhjdADAdgaZCwan232hcui21bb';
+    // user.carId = adhjdADAdgaZCwan232hcui21bb;
 
     const newUser = new User(user);
 
@@ -129,51 +157,6 @@ exports.register = (req, res, next) => {
 };
 
 /**
- * @route POST http://localhost:3001/users/login
- */
-exports.login = (req, res, next) => {
-    User
-        .findOne({ email: req.body.email }) // search user by username
-        .then(user => {
-            if(!user) {
-                return res.status(400).json({
-                    message: 'Usuário não encontrado.',
-                    sucess: false,
-                    data: req.body,
-                });
-            }
-
-            bcrypt.compare(req.body.password, user.password) // compare passwords
-                  .then(isMatch => {
-                      if(isMatch) {
-                          
-                        // return token
-                        const data = {
-                            username: user.username,
-                            email: user.email,
-                        }
-                        res.status(200).send({
-                            data: data,
-                            sucess: true,
-                            message: 'acesso liberado',
-                        });
-                      } else {
-                        res.status(400).send({
-                            message: 'Senha ou Usuários incorretos.',
-                            sucess: false,
-                        });
-                      }
-                  });
-        }).catch(e =>  {
-            res.status(400).send({
-                message: 'Usuário não encontrado.',
-                sucess: false,
-                data: e
-            });
-        });
-}
-
-/**
  * @route DELETE http://localhost:3001/users/delete/:id
  * @obj Delete user
  * @acess private
@@ -183,11 +166,11 @@ exports.delete = (req, res, next) => {
         .findOneAndDelete(req.params.id)
         .then(x => {
             res.status(200).send({
-                message: 'Deletado.'
+                message: 'Deletado'
             });
         }).catch(e => {
             res.status(400).send({
-                message: 'Falha ao deletar.',
+                message: 'Falha ao deletar',
                 data: e
             });
         });
@@ -255,4 +238,3 @@ exports.authenticate = async(req, res, next) => {
         });
     }
 };
-

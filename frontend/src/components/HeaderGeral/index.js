@@ -9,12 +9,28 @@ import menuImg from '../../images/menu.svg';
 export default function Logon() {
     const history = useHistory();
 
+    let mobileMenuVisible = false;
+
+    const load = () => {
+        // menu show / hide
+        var secondBar = document.getElementById("secondBar");
+
+        if(mobileMenuVisible) {
+            mobileMenuVisible = false;
+            secondBar.style.display = "none";
+        }
+        else {
+            mobileMenuVisible = true;
+            secondBar.style.display = "block";
+        }
+    }
+
     return (
         <header class="geral">
             <div class="main">
                 <Link to="/"><img src={logoImg} alt="Logo" class="logo" /></Link>
                 <nav class="mobile">
-                    <img src={menuImg} alt="menu" id="menu" />
+                    <img src={menuImg} alt="menu" id="menu" onClick={() => load()} />
                     
                 </nav>
                 <div class="right">

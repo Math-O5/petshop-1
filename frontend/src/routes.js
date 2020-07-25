@@ -8,6 +8,11 @@ const routes = {
   profile: '/profile',
   pets: '/pets',
   cart: '/cart',
+  clients: '/clients',
+  clientsInfo: '/clients/info',
+  admins: '/admins',
+  adminsInfo: '/admins/info',
+  profit: '/profit',
 };
   
 export default routes;

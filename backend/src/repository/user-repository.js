@@ -8,6 +8,11 @@ exports.get = async() => {
     return res;
 }
 
+exports.getAdmins = async() => {
+    const res = await User.find({role: 'Admin'},'id username email address role tel born petsId carId'); 
+    return res;
+}
+
 exports.updateToken = async(id, token) => {
     const res = await User.findByIdAndUpdate(id, {
         $set: {

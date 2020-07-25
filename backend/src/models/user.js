@@ -47,12 +47,14 @@ const user = new Schema({
         Required: [true, 'A imagem é obrigatória']
     },
     petsId: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Pet"
     }],
     carId: {
-        type: String,
-        required: [true, 'O usuário não tem carrinho']
-    }
-});
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cart",
+        // required: [true, 'O usuário não tem carrinho']
+    },
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', user);
