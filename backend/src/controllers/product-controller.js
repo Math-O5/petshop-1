@@ -17,9 +17,20 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {
-    try {
-        let data = await repository.getById(req.params.id) 
-        res.status(200).send(data);
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    
+    try {      
+        const data = await authService.decodeToken(token);
+        const id = await User.findById(data.id, '_id');
+        const user = await repository.getById(id) 
+
+        if(!user) {
+            return res.status(400).send({
+                message: 'Usuário não encontrado',
+            });
+        }
+        
+        res.status(200).send(user);
     } catch (e) {
         res.status(500).send({
             message: 'Falha ao buscar produto',
@@ -59,7 +70,7 @@ exports.post = async(req, res, next) => {
         filepath: req.body.filepath,
         price: req.body.price,
         quantityStore: req.body.quantityStore,
-        quantitySold: req.body.quantitySold,
+        quantitySold: 0,
         type: req.body.type,
     }
 
@@ -68,10 +79,8 @@ exports.post = async(req, res, next) => {
     contract.hasMinLen(product.description, 3, 'A descrição é muito curta. No mínimo 3 caracteres');
     contract.hasSpace(product.slug, 'O Slug não pode haver espaçoes');
     contract.isNumber(product.quantityStore, 'A quantidade em estoque deve ser um número');
-    contract.isNumber(product.quantitySold, 'A quantidade vendida deve ser um número');
     contract.isNumber(product.price, 'O valor é um número');
     contract.hasMinValue(product.quantityStore, 0, 'O estoque já está vazio');
-    contract.hasMinValue(product.quantitySold, 0, 'O estoque já está vazio');
 
     // If one fail, return error 400 and message
     if(!contract.isValid()) {
@@ -93,6 +102,34 @@ exports.post = async(req, res, next) => {
 };
 
 exports.put = async(req, res, next) => {
+    let contract = new ValidationContract();
+
+    const product = {
+        title: req.body.title,
+        slug: req.body.slug,
+        description: req.body.description,
+        filepath: req.body.filepath,
+        price: req.body.price,
+        quantityStore: req.body.quantityStore,
+        type: req.body.type,
+    }
+
+    contract.hasMinLen(product.title, 3, 'O nome do produto é muito curto. No mínimo 3 caracteres');
+    contract.hasMinLen(product.slug, 3, 'O slug é muito curto. No mínimo 3 caracteres');
+    contract.hasMinLen(product.description, 3, 'A descrição é muito curta. No mínimo 3 caracteres');
+    contract.hasSpace(product.slug, 'O Slug não pode haver espaçoes');
+    contract.isNumber(product.quantityStore, 'A quantidade em estoque deve ser um número');
+    contract.isNumber(product.quantitySold, 'A quantidade vendida deve ser um número');
+    contract.isNumber(product.price, 'O valor é um número');
+    contract.hasMinValue(product.quantityStore, 0, 'O estoque já está vazio');
+
+    // If one fail, return error 400 and message
+    if(!contract.isValid()) {
+        return res.status(400).json({
+            message: contract.firstError().message,
+        });
+    }
+  
     try {
         let data = await repository.update(req.params.id, req.params.body)
         res.status(200).send({data});

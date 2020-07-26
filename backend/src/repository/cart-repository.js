@@ -21,9 +21,10 @@ exports.create = async(data) => {
 exports.add = async(cart, item) => {
     try {
         let index = cart.products.findIndex(prod => prod.productId == item.productId);
-    
-        // If the product already exist, just ensure that the values are update and change to the new quantity
-        if (index > -1) {
+  
+        if(index > -1 && item.quantity <= 0) {
+            cart.products.splice(index, 1);
+        } else if (index > -1) {
             let productItem = cart.products[index];
             productItem.quantity = item.quantity;
             productItem.price = item.price,
@@ -57,4 +58,8 @@ exports.removeProduct = async(cart, itemId) => {
 exports.remove = async(cartId) => {
     const cart = await Cart.findById(cartId);
     cart.remove();
+}
+
+exports.evaluete = async() => {
+
 }

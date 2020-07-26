@@ -1,13 +1,22 @@
 'use strict'
 
+// Libs
 const mongoose = require('mongoose');
-const authService = require('../services/auth-service');
-const User = mongoose.model('User');
-const Cart = mongoose.model('Cart');
 const bcrypt = require('bcryptjs');
+
+// services
+const authService = require('../services/auth-service');
+
+// Models
+const User = mongoose.model('User');
+
+// Auxiliars
 const ValidationContract = require('../validators/validators');
 const repository = require('../repository/user-repository');
 const repositoryCart = require('../repository/cart-repository');
+const repositoryPet = require('../repository/pet-repository.js');
+
+// Helpers
 const Role = require('../helpers/role');
 
 mongoose.set('useFindAndModify', false);
@@ -76,12 +85,12 @@ exports.getByUsername = (req, res, next) => {
 exports.register = async(req, res, next) => {
     try {
         // Validate Admin
-        let role = Role.User;
-        const admin = await User.findOne({token: req.body.token});
+        let role = Role.User; // Default: User
+        const isAdmin = await User.findOne({token: req.body.token});
         
-        if(admin) {
-            if(admin && admin.role === Role.Admin) {
-                role = req.body.role;
+        if(isAdmin) {
+            if(isAdmin && isAdmin.role === Role.Admin) {
+                role = req.body.role; // If the user is Admin, the role is custumizable
             }
         }
         
@@ -100,11 +109,14 @@ exports.register = async(req, res, next) => {
         
         let contract = new ValidationContract();
         
+        // Ensure Min, Max Length of input and formatation
         contract.isEmail(user.email, 'O email não é válido');
-        contract.hasMaxLen(user.username, 9, 'O username ultrapassou o limite de 9 caractes.');
-        contract.hasMinLen(user.username, 5, 'O username não tem menos de 5 caracteres.');
+        contract.hasMinLen(user.username, 4, 'O username não tem menos de 5 caracteres.');
         contract.hasMinLen(user.address, 10, 'O endereço não contém informações suficientes.');
         contract.hasMinLen(user.password, 9, 'Senha muito curta');
+        contract.hasMaxLen(user.username, 15, 'O username ultrapassou o limite de 9 caractes.');
+        contract.hasMaxLen(user.address, 100, 'O endereço ultrapassou o limite de caracteres(50).');
+        contract.hasMaxLen(user.password, 20, 'Senha pode conter até 20 caracteres');
         contract.hasSpace(user.password, 'Espaço não é permitida na senha.');
         contract.isEqual(user.password, user.cpassword, 'Senhas diferentes.');
         contract.isDate(user.born, 'Data de nascimento inválida');
@@ -189,12 +201,13 @@ exports.delete = async(req, res, next) => {
                     message: 'Usuário não encontrado'
                 });
             } else {
-                    repositoryCart.remove(user.cartId);
-                    user.remove();
-                    return res.status(200).send({
-                        message: 'Deletado',
-                        id: req.params.id,
-                    });
+                repositoryCart.remove(user.cartId);
+                repositoryPet.remove(user.petsId);
+                user.remove();
+                return res.status(200).send({
+                    message: 'Deletado',
+                    id: req.params.id,
+                });
             }
 
         });

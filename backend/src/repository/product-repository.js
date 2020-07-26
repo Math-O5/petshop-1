@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
 exports.get = async() => {
-    const res = await Product.find(); 
+    const res = await Product.find({}, 'id title description price type'); 
     return res;
 }
 
@@ -18,7 +18,7 @@ exports.getBySlug = async(slug) => {
     const res = await Product
         .findOne({
             slug: slug,
-        });
+        },'id title description price type');
     return res;
 }
 
@@ -26,7 +26,7 @@ exports.getByType = async(type) => {
     const res = await Product
         .find({
             type: type,
-        });
+        }, 'id title description price type');
     return res;
 } 
 
@@ -39,8 +39,11 @@ exports.update = async(id, data) => {
     const res = await Product.findByIdAndUpdate(id, {
         $set: {
             title: data.title,
+            slug: data.slug,
             description: data.description,
-            price: data.price
+            price: data.price,
+            filepath: data.filepath,
+            quantityStore: data.quantityStore,
         }
     });
     return res;
@@ -49,3 +52,8 @@ exports.update = async(id, data) => {
 exports.delete = async(id) => {
     await Product.findOneAndRemove(id);
 }
+
+exports.updateStore = async(id, quantitySold) => {
+    
+    return res;
+} 
