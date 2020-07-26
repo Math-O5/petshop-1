@@ -35,6 +35,24 @@ export default function Logon(props) {
         loadData();
     }, []);
 
+    const handleBuy = async () => {
+        setLoading(true);
+        try {
+            const data = {
+                productId,
+                quantity: 1
+            }
+            
+            const response = await axios.post("/cart", data);
+
+
+            history.push('/cart');
+        } catch (error) {
+            console.log(error);
+        }
+        setLoading(false);
+    }
+
     return (
         <div class="container">
             <div class="container-header">
@@ -56,7 +74,7 @@ export default function Logon(props) {
                     <p>DISPONÍVEL NO ESTOQUE</p>
                     <p class="price">R${product.price}</p>
                     <p>ou 3 vezes no cartão.</p>
-                    <button>ADICIONAR AO CARRINHO</button>
+                    <button onClick={() => handleBuy()}>ADICIONAR AO CARRINHO</button>
                 </div>
                 <div class="details-container">
                     <h2>
