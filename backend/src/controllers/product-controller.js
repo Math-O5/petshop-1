@@ -16,21 +16,22 @@ exports.get = async(req, res, next) => {
     }
 }
 
-exports.getById = async(req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    
+exports.getById = async(req, res, next) => {  
     try {      
-        const data = await authService.decodeToken(token);
-        const id = await User.findById(data.id, '_id');
-        const user = await repository.getById(id) 
+        const prod = await repository.getById(req.params.id);
 
-        if(!user) {
+        if(!prod) {
             return res.status(400).send({
-                message: 'Usuário não encontrado',
+                id: req.params.id,
+                prod: prod,
+                message: 'Produto não encontrado',
             });
         }
         
-        res.status(200).send(user);
+        res.status(200).send({
+            id: req.params.id,
+            prod: prod
+        });
     } catch (e) {
         res.status(500).send({
             message: 'Falha ao buscar produto',
@@ -69,6 +70,8 @@ exports.post = async(req, res, next) => {
         description: req.body.description,
         filepath: req.body.filepath,
         price: req.body.price,
+        brand: req.body.brand,
+        animal: req.body.animal,
         quantityStore: req.body.quantityStore,
         quantitySold: 0,
         type: req.body.type,
