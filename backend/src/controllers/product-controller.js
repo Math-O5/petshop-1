@@ -71,7 +71,7 @@ exports.post = async(req, res, next) => {
         filepath: req.body.filepath,
         price: req.body.price,
         brand: req.body.brand,
-        animal: req.body.animal,
+        animals: req.body.animals,
         quantityStore: req.body.quantityStore,
         quantitySold: 0,
         type: req.body.type,

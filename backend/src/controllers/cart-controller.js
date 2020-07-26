@@ -143,12 +143,13 @@ exports.buy = async(req, res, next) => {
                 message: 'Usuário não encontrado',
             });
         }
-        let productsId = await mapCart(cart);
 
-        if(cart) {
+        cart = await mapCart(cart);
+
+        
             let products = await Product.find({
-                '_id' : { $in: productsId     }
-            }, {mult: true}, function(err, product) {
+                '_id' : { $in: cart  }
+                }, {mult: true}, function(err, product) {
                 if(err) {
                     return res.status(500).send({
                         prod: product,
@@ -162,11 +163,12 @@ exports.buy = async(req, res, next) => {
                 prod: productsId,
                 message: 'success',
             });
-            } else {
-                return res.status(400).send({
-                    message: 'carrinho não encontrado',
-                });
-        }
+             
+        // else {
+        //     return res.status(400).send({
+        //         message: 'carrinho não encontrado',
+        //     });
+        // }
     } catch(e) {
         return res.status(400).send({
             message: 'error',
