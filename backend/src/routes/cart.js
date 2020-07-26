@@ -7,7 +7,7 @@ const Role = require('../helpers/role');
 const router = express.Router();
 
 router.get('/', authService.authorize(Role.Admin), controllerCart.get);
-router.get('/user', authService.authorize(), controllerCart.getById);
+router.get('/buy', authService.authorize(), controllerCart.getById);
 router.post('/', authService.authorize(), controllerCart.post);
 router.post('/buy', authService.authorize(), controllerCart.buy);
 router.delete('/', authService.authorize(), controllerCart.delete);
