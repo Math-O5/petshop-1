@@ -36,9 +36,17 @@ const product = new Schema({
     },
     quantitySold: {
         type: Number,
-        required: [true, 'Informe a quantidade disponível']
+        default: 0,
     },
     type: [{
+        type: String,
+        required: true
+    }],
+    brand: {
+        type: String,
+        required: [true, 'A marca é obrigatória'],
+    },
+    animals: [{
         type: String,
         required: true
     }]

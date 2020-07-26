@@ -8,7 +8,7 @@ const Role = require('../helpers/role');
 
 router.get('/', controllerProducts.get);
 router.get('/:id', controllerProducts.getById);
-router.get('/slug/', controllerProducts.getBySlug);
+// router.get('/slug/', controllerProducts.getBySlug);
 router.get('/type/:type', controllerProducts.getByType);
 router.post('/', authService.authorize(Role.Admin), controllerProducts.post);
 router.put('/', authService.authorize(Role.Admin), controllerProducts.put);
