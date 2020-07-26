@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import Loading from '../../components/Loading';
 
 
 export default function Logon() {
     const history = useHistory();
+
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const responseProducts = await axios.get("/product");
+                setProducts(responseProducts.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <div class="container">
@@ -82,18 +104,10 @@ export default function Logon() {
                         </div>
                     </div> 
                     <div class="productsList">
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
-                        <ProductItem />
+                        {loading && (<Loading />)}
+                        {products.slice(0,Math.min(products.length, 13)).map(product => (
+                            <ProductItem data={product}/>
+                        ))}
                     </div>
 
                 </main>

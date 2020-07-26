@@ -6,9 +6,10 @@ const controllerPet = require('../controllers/pet-controller');
 const Role = require('../helpers/role');
 const router = express.Router();
 
-router.get('/', authService.authorize(Role.Admin), controllerPet.get);
+router.get('/', controllerPet.get);
 router.get('/:id', authService.authorize(), controllerPet.getById);
+router.get('/perfil/geral', authService.authorize(), controllerPet.getAllPets);
 router.post('/', authService.authorize(), controllerPet.register);
-router.delete('/', authService.authorize(), controllerPet.delete);
+router.delete('/:id', authService.authorize(), controllerPet.delete);
 
 module.exports = router;

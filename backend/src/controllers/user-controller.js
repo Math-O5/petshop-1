@@ -115,7 +115,7 @@ exports.register = async(req, res, next) => {
         contract.hasMinLen(user.address, 10, 'O endereço não contém informações suficientes.');
         contract.hasMinLen(user.password, 9, 'Senha muito curta');
         contract.hasMaxLen(user.username, 15, 'O username ultrapassou o limite de 9 caractes.');
-        contract.hasMaxLen(user.address, 30, 'O endereço não contém informações suficientes.');
+        contract.hasMaxLen(user.address, 100, 'O endereço ultrapassou o limite de caracteres(50).');
         contract.hasMaxLen(user.password, 20, 'Senha pode conter até 20 caracteres');
         contract.hasSpace(user.password, 'Espaço não é permitida na senha.');
         contract.isEqual(user.password, user.cpassword, 'Senhas diferentes.');

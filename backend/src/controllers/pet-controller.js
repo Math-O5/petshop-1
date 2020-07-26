@@ -5,6 +5,8 @@ const ValidationContract = require('../validators/validators');
 const Product = require('../models/product');
 const User = require('../models/user');
 const Cart = require('../models/cart');
+const Pet = require('../models/pet');
+
 const authService = require('../services/auth-service');
 
 exports.get = async(req, res, next) => {
@@ -18,6 +20,9 @@ exports.get = async(req, res, next) => {
     }
 }
 
+/**
+ * @param { Object.id } req.params.id : Id of the PET
+ */
 exports.getById = async(req, res, next) => {
     try {
         const pet = await Pet.findById(req.params.id);
@@ -35,6 +40,33 @@ exports.getById = async(req, res, next) => {
     }
 }
 
+exports.getAllPets = async(req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token']; 
+    try {      
+        // Retrieve user
+        const data = await authService.decodeToken(token);
+        const user = await User.findById(data.id);
+
+        if(!user) {
+            return res.status(400).send({
+                message: 'Usuário não encontrado',
+            });
+        }
+
+        let pets = await Pet.find({
+            '_id': { $in: user.petsId }
+        });
+
+        return res.status(201).send({
+            pets: pets,
+            message: 'success',
+        });
+    } catch(e) {
+        return res.status(500).send({
+            message: 'A busca não pode ser concluída',
+        });
+    }
+}
 /**
  *  @param { String } token : the token given to the user in the login
  *  @param { ObjectId } productId : the id you want to add
@@ -66,23 +98,31 @@ exports.register = async(req, res, next) => {
         })
     }
 
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
     
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     try {      
+
+        const matchPet = await Pet.findOne({name: pet.name});
+        if(matchPet) {
+            return res.status(400).send({
+                message: 'Um pet com esse nome já existe'
+            })
+        }
+
         // Retrieve user
         const data = await authService.decodeToken(token);
-        const user = await User.findById(data.id);
+        let user = await User.findById(data.id);
 
         if(!user) {
             return res.status(400).send({
                 message: 'Usuário não encontrado',
             });
         }
+
         await repository.add(user, pet);
 
         return res.status(201).send({
-            user: user,
-            pet: pet,
             message: 'Pet registrado com sucesso',
         });
     } catch(e) {
@@ -90,7 +130,6 @@ exports.register = async(req, res, next) => {
             message: 'O registro não foi finalizado',
         });
     }
-   
 };
 
 exports.delete = async(req, res, next) => {    

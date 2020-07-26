@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import axios from 'axios';
+
 // styles
 import './global.css';
 
@@ -36,6 +38,31 @@ import AdminProductsInfo from './pages/AdminProductsInfo';
 import AdminProfit from './pages/AdminProfit';
 import AdminServices from './pages/AdminServices';
 import AdminServicesInfo from './pages/AdminServicesInfo';
+
+
+const baseURL = 'http://localhost:3000';
+
+axios.defaults.baseURL = baseURL;
+
+// axios.interceptors.response.use(
+//   function (response) {
+//     // Do something with response data
+//     return response;
+//   },
+//   function (error) {
+//     // Do something with response error
+//     if (
+//       error.response &&
+//       error.response.status &&
+//       error.response.status === 401
+//     ) {
+//       Auth.logOut(true);
+//       window.location.href = '/login';
+//     }
+
+//     return Promise.reject(error);
+//   }
+// );
 
 export const PrivateRoute = ({ indicator, components, ...rest }) => (
     <Route

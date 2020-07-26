@@ -3,11 +3,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const db = require('../config').mongoURI;
 
 const app = express();
 const router = express.Router();
-
+app.use(cors());
 
 /**
  * @param { String } db is the URL do banco

@@ -22,8 +22,8 @@ exports.create = async(data) => {
 exports.add = async(user, pet) => {
     try {
         pet.owner = user._id;
-        const newPet = new Pet(pet);
-        user.petId.push(newPet._id);
+        const newPet = await new Pet(pet);
+        await user.petsId.push(newPet._id);
         await newPet.save();
         await user.save();
     } catch(e) {
