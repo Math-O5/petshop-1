@@ -146,23 +146,23 @@ exports.buy = async(req, res, next) => {
 
         cart = await mapCart(cart);
 
-        
-            let products = await Product.find({
-                '_id' : { $in: cart  }
-                }, {mult: true}, function(err, product) {
-                if(err) {
-                    return res.status(500).send({
-                        prod: product,
-                        message: 'Falha ao buscar usuário',
-                        e: err,
-                    });
-                }
-            });
-            return res.status(200).send({
-                product: products,
-                prod: productsId,
-                message: 'success',
-            });
+    
+        let products = await Product.find({
+            '_id' : { $in: cart  }
+            }, {mult: true}, function(err, product) {
+            if(err) {
+                return res.status(500).send({
+                    prod: product,
+                    message: 'Falha ao buscar usuário',
+                    e: err,
+                });
+            }
+        });
+        return res.status(200).send({
+            product: products,
+            prod: productsId,
+            message: 'success',
+        });
              
         // else {
         //     return res.status(400).send({

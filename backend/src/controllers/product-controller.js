@@ -28,10 +28,7 @@ exports.getById = async(req, res, next) => {
             });
         }
         
-        res.status(200).send({
-            id: req.params.id,
-            prod: prod
-        });
+        res.status(200).send(prod);
     } catch (e) {
         res.status(500).send({
             message: 'Falha ao buscar produto',
