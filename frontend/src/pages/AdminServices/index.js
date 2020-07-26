@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import Loading from '../../components/Loading';
 
 
 export default function Logon() {
     const history = useHistory();
 
-    const selectRow = () => {
-        history.push('/services/info');
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get("/service");
+                setProducts(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
+
+    const selectRow = (id) => {
+        history.push(`/services/${id}`);
     }
 
     return (
@@ -42,22 +63,17 @@ export default function Logon() {
                     <td>lucro</td>
                 </thead>
                 <tbody>
-                    <tr onClick={() => selectRow()} >
-                        <td>Ração food dog</td>
-                        <td>R$ 40.00</td>
-                        <td>R$ 20.00</td>
+                {loading && (<Loading />)}
+                {products.map(product => (
+                    <tr key={product._id} onClick={() => selectRow(product._id)} >
+                        <td>{product.title}</td>
+                        <td>{product.price}</td>
+                        <td>{product.price}</td>
                         <td>22</td>
                         <td>4</td>
                         <td>R$ 80.00</td>
                     </tr>
-                    <tr>
-                        <td>Ração food dog</td>
-                        <td>R$ 40.00</td>
-                        <td>R$ 20.00</td>
-                        <td>22</td>
-                        <td>4</td>
-                        <td>R$ 80.00</td>
-                    </tr>
+                ))}
                 </tbody>
             </table>
 

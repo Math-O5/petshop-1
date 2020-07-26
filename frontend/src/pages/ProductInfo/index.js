@@ -48,6 +48,7 @@ export default function Logon(props) {
                 </div>
                 <div class="content-container">
                     <h2>{product.title}</h2>
+                    {loading && (<Loading />)}
                     <p>{product.description}</p>
                 </div>
                 <div class="buy-container">

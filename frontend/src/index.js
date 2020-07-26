@@ -69,7 +69,7 @@ export const PrivateRoute = ({ indicator, components, ...rest }) => (
       {...rest}
       render={(props) => {
         // const userData = Auth.isAuthenticated();
-        const indicator = parseInt(1); // mudar dps
+        const indicator = parseInt(2); // mudar dps
         // if (!userData || !components[indicator]) {
         //   return (
         //     <Redirect

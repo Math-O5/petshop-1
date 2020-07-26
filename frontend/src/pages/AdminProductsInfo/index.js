@@ -1,51 +1,85 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
-
 // componentes
-import ProductItem from '../../components/ProductItem';
+import productImg from '../../images/product.jpg';
+import Loading from '../../components/Loading';
 
-
-export default function Logon() {
+export default function Logon(props) {
     const history = useHistory();
+
+    const productId = props.match.params.id;
+
+    const [product, setProduct] = useState({});
+    const [loading, setLoading] = useState(false);
+    
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`/product/${productId}`);
+                setProduct(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <main class="products" id="admin">
             <div class="title">
                 <h1>Produtos</h1>
-                <a href="admin_products.html"><button class="button">Voltar</button></a>
+                <Link to="/products"><button class="button">Voltar</button></Link>
             </div>
-            <div class="info">
-                <div class="row">
-                    <p>Nome:</p>
-                    <p>Ração food dog</p>
+            <div class="info row">
+            {loading && (<Loading />)}                
+            {!loading && (<>
+                <div class="img-container">
+                    <img src={productImg} alt="Imagem do produto" />
                 </div>
-                <div class="row">
-                    <p>Marca:</p>
-                    <p>food dog</p>
+                <div>
+                    <div class="row">
+                        <p>Nome:</p>
+                        <p>{product.title}</p>
+                    </div>
+                    <div class="row">
+                        <p>Descrição:</p>
+                        <p>{product.description}</p>
+                    </div>
+                    <div class="row">
+                        <p>Marca:</p>
+                        <p>food dog ADD MODEL</p>
+                    </div>
+                    <div class="row">
+                        <p>preço de venda:</p>
+                        <p>{product.title}</p>
+                    </div>
+                    <div class="row">
+                        <p>Preço de compra:</p>
+                        <p>R$ 20.00 ADD MODEL</p>
+                    </div>
+                    <div class="row">
+                        <p>Quant. estoque:</p>
+                        <p>22 ADD MODEL</p>
+                    </div>
+                    <div class="row">
+                        <p>Quant. vendida:</p>
+                        <p>4 ADD MODEL</p>
+                    </div>
+                    <div class="row">
+                        <p>Lucro:</p>
+                        <p>R$ 80.00</p>
+                    </div>
                 </div>
-                <div class="row">
-                    <p>preço de venda:</p>
-                    <p>R$ 40.00</p>
-                </div>
-                <div class="row">
-                    <p>Preço de compra:</p>
-                    <p>R$ 20.00</p>
-                </div>
-                <div class="row">
-                    <p>Quant. estoque:</p>
-                    <p>22</p>
-                </div>
-                <div class="row">
-                    <p>Quant. vendida:</p>
-                    <p>4</p>
-                </div>
-                <div class="row">
-                    <p>Lucro:</p>
-                    <p>R$ 80.00</p>
-                </div>
+            </>)}
             </div>
 
             <div class="row options">

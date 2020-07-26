@@ -17,10 +17,12 @@ exports.get = async(req, res, next) => {
     }
 }
 
-exports.getByUserId = async(req, res, next) => {
+exports.getById = async(req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     try {
-        const user = await User.findById(req.params.userId);
-    
+        const data = await authService.decodeToken(token);
+        const user = await User.findById(data.id);
+   
         if(!user) {
             res.status(500).send({
                 message: 'Falha ao buscar usuário',
@@ -87,7 +89,6 @@ exports.post = async(req, res, next) => {
             message: 'Item não adicionado ao carrinho'
         });
     }
-   
 };
 
 exports.delete = async(req, res, next) => {    
@@ -118,3 +119,46 @@ exports.delete = async(req, res, next) => {
         });
     }
 };
+
+exports.buy = async(req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    try {
+        const data = await authService.decodeToken(token);
+        const user = await User.findById(data.id);
+
+        let cart = await Cart.findById(user.cartId);
+        
+        if(!user) {
+            return res.status(400).send({
+                message: 'Usuário não encontrado',
+            });
+        }
+
+        if(cart) {
+            let products = await Product.find({
+                '_id': { $in: cart.products.productId }
+            }, function(err, product) {
+                if(err) {
+                    return res.status(500).send({
+                        prod: product,
+                        message: 'Falha ao buscar usuário',
+                        e: err,
+                    });
+                }
+                return res.status(200).send({
+                    product: product,
+                    message: 'success',
+                });
+            });
+        } else {
+            return res.status(400).send({
+                message: 'carrinho não encontrado',
+            });
+        }
+    } catch(e) {
+        return res.status(400).send({
+            message: 'error',
+            e: e,
+        });
+    }
+}

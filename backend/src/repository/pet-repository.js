@@ -35,3 +35,15 @@ exports.remove = async(petId) => {
     const pet = await Pet.findById(petId);
     pet.remove();
 }
+
+exports.update = async(id, data) => {
+    const res = await Pet.findByIdAndUpdate(id, {
+        $set: {
+            name: data.name,
+            race: data.race,
+            age: data.age,
+            description: data.description,
+        }
+    });
+    return res;
+}
