@@ -148,30 +148,32 @@ exports.buy = async(req, res, next) => {
                 message: 'Usuário não encontrado',
             });
         }
-        let productsId = await mapCart(cart);
 
-        if(cart) {
-            let products = await Product.find({
-                '_id' : { $in: productsId     }
+        cart = await mapCart(cart);
+
+    
+        let products = await Product.find({
+            '_id' : { $in: cart  }
             }, {mult: true}, function(err, product) {
-                if(err) {
-                    return res.status(500).send({
-                        prod: product,
-                        message: 'Falha ao buscar usuário',
-                        e: err,
-                    });
-                }
-            });
-            return res.status(200).send({
-                product: products,
-                prod: productsId,
-                message: 'success',
-            });
-            } else {
-                return res.status(400).send({
-                    message: 'carrinho não encontrado',
+            if(err) {
+                return res.status(500).send({
+                    prod: product,
+                    message: 'Falha ao buscar usuário',
+                    e: err,
                 });
-        }
+            }
+        });
+        return res.status(200).send({
+            product: products,
+            prod: productsId,
+            message: 'success',
+        });
+             
+        // else {
+        //     return res.status(400).send({
+        //         message: 'carrinho não encontrado',
+        //     });
+        // }
     } catch(e) {
         return res.status(400).send({
             message: 'error',

@@ -12,7 +12,7 @@ router.get('/slug/', controllerProducts.getBySlug);
 router.get('/type/:type', controllerProducts.getByType);
 router.post('/', authService.authorize(Role.Admin), controllerProducts.post);
 router.put('/', authService.authorize(Role.Admin), controllerProducts.put);
-router.delete('/', authService.authorize(Role.Admin), controllerProducts.delete);
+router.delete('/:id', authService.authorize(Role.Admin), controllerProducts.delete);
 
 module.exports = router;
 
