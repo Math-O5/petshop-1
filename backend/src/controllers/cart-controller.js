@@ -120,8 +120,18 @@ exports.delete = async(req, res, next) => {
     }
 };
 
+const mapCart = async(obj) => {
+    let productsId = [];
+    for(let i = 0; i < obj.products.length; ++i) {
+        productsId.push(obj.products.productId);
+    }
+    return productsId;
+}  
+
 exports.buy = async(req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    
+
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
@@ -133,10 +143,11 @@ exports.buy = async(req, res, next) => {
                 message: 'Usuário não encontrado',
             });
         }
+        let productsId = await mapCart(cart);
 
         if(cart) {
-            let products = await Product.find({
-                '_id': { $in: cart.products.productId }
+            let products = await Product.findById({
+                 $in: productsId
             }, function(err, product) {
                 if(err) {
                     return res.status(500).send({
@@ -145,15 +156,16 @@ exports.buy = async(req, res, next) => {
                         e: err,
                     });
                 }
-                return res.status(200).send({
-                    product: product,
-                    message: 'success',
+            });
+            return res.status(200).send({
+                product: products,
+                prod: productsId,
+                message: 'success',
+            });
+            } else {
+                return res.status(400).send({
+                    message: 'carrinho não encontrado',
                 });
-            });
-        } else {
-            return res.status(400).send({
-                message: 'carrinho não encontrado',
-            });
         }
     } catch(e) {
         return res.status(400).send({

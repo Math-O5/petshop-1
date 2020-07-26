@@ -154,8 +154,15 @@ exports.register = async(req, res, next) => {
         });
         user.cartId = cart._id;
         
-        const newUser = new User(user);
+        const newUser = await new User(user);
         
+        // Generate token
+        const token = await authService.generateToken({
+            "id": newUser._id,
+            "email": newUser.email,
+            "username": newUser.username
+        });
+
         // hash passport
         bcrypt.genSalt(global.SALT_NUMBER, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -165,6 +172,11 @@ exports.register = async(req, res, next) => {
                     newUser.save()
                     .then(_ => {
                         res.status(201).send({
+                            id: newUser._id,
+                            username: newUser.username,
+                            email: newUser.email,
+                            token: token,
+                            role: newUser.role,
                             message: 'User cadastrado com sucesso!'
                         });
                     }).catch(e =>  {
