@@ -174,3 +174,8 @@ main#admin .row button.add {
     background-color: rgb(17, 175, 17);
 }
 
+main#admin .img-container img {
+    /* display: block; */
+    max-width: 200px;
+    max-height: 200px;
+}
