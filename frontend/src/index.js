@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import axios from 'axios';
+
+import Auth from './services/auth';
 
 // styles
 import './global.css';
@@ -39,7 +41,6 @@ import AdminProfit from './pages/AdminProfit';
 import AdminServices from './pages/AdminServices';
 import AdminServicesInfo from './pages/AdminServicesInfo';
 
-
 const baseURL = 'http://localhost:3000';
 
 axios.defaults.baseURL = baseURL;
@@ -68,16 +69,16 @@ export const PrivateRoute = ({ indicator, components, ...rest }) => (
     <Route
       {...rest}
       render={(props) => {
-        // const userData = Auth.isAuthenticated();
-        const indicator = parseInt(2); // mudar dps
-        // if (!userData || !components[indicator]) {
-        //   return (
-        //     <Redirect
-        //       to={{ pathname: '/login', state: { from: props.location } }}
-        //     />
-        //   );
-        // }
-  
+        const userData = Auth.isAuthenticated();
+        const indicator = parseInt(userData.indicator); // mudar dps
+        console.log(indicator)
+        if (!userData || !components[indicator]) {
+          return (
+            
+            <HomeGeral />
+          );
+        }
+        
         const Component = components[indicator];
         return <Component {...props} />;
       }}
@@ -112,7 +113,7 @@ function App() {
                   components={{
                     0: HomeGeral,
                     1: HomeUser,
-                    2: NotSet
+                    2: AdminClients
                   }}
                   exact
                 ></PrivateRoute>

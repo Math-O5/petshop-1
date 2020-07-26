@@ -38,7 +38,12 @@ function authorize(role = []) {
         async(req, res, next) => {
             
             // Load token
-            const token = req.body.token || req.query.token || req.headers['x-access-token'];
+            let token = '';
+            if(!req.header('Authorization'))
+                token = req.body.token || req.query.token || req.header('Authorization') || req.headers['x-access-token'];
+            else 
+                token = req.header('Authorization').replace('Bearer ', '');
+            
 
             // Check if token was not given
             if(!token) {

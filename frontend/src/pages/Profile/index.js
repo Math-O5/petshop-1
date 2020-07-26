@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 
 import './styles.css';
 
+import Auth from '../../services/auth';
 
 export default function Logon() {
     const history = useHistory();
+
+    async function handleLogout() {
+        Auth.logOut()
+        history.push('/');
+    }
 
     return (
         <div class="container">
@@ -105,6 +111,9 @@ export default function Logon() {
                 </div>
                 <div class="button-container">
                     <button>EDITAR INFORMAÇOES</button>
+                </div>
+                <div class="button-container">
+                    <button onClick={() => handleLogout()}>SAIR</button>
                 </div>
             </div>
             
