@@ -18,7 +18,12 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = '';
+    if(!req.header('Authorization'))
+        token = req.body.token || req.query.token || req.header('Authorization') || req.headers['x-access-token'];
+    else 
+        token = req.header('Authorization').replace('Bearer ', '');
+        
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
