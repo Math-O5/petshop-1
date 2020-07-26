@@ -9,7 +9,7 @@ const routes = {
   pets: '/pets',
   cart: '/cart',
   clients: '/clients',
-  clientsInfo: '/clients/info',
+  clientsInfo: '/clients/:id',
   admins: '/admins',
   adminsInfo: '/admins/info',
   profit: '/profit',
