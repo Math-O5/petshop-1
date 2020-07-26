@@ -120,7 +120,7 @@ exports.delete = async(req, res, next) => {
     }
 };
 
-const mapCart = async(obj) => {
+const mapCart = (obj) => {
     let productsId = [];
     for(let i = 0; i < obj.products.length; ++i) {
         productsId.push(obj.products.productId);
@@ -146,9 +146,9 @@ exports.buy = async(req, res, next) => {
         let productsId = await mapCart(cart);
 
         if(cart) {
-            let products = await Product.findById({
-                 $in: productsId
-            }, function(err, product) {
+            let products = await Product.find({
+                '_id' : { $in: productsId     }
+            }, {mult: true}, function(err, product) {
                 if(err) {
                     return res.status(500).send({
                         prod: product,

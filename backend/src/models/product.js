@@ -44,7 +44,6 @@ const product = new Schema({
     }],
     brand: {
         type: String,
-        required: [true, 'A marca é obrigatória'],
     },
     animals: [{
         type: String,
