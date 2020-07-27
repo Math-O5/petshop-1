@@ -18,7 +18,12 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = '';
+    if(!req.header('Authorization'))
+        token = req.body.token || req.query.token || req.headers['x-access-token'];
+    else 
+        token = req.header('Authorization').replace('Bearer ', '');
+        
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
@@ -62,7 +67,11 @@ exports.post = async(req, res, next) => {
         })
     }
 
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    let token = '';
+    if(!req.header('Authorization'))
+        token = req.body.token || req.query.token || req.headers['x-access-token'];
+    else 
+        token = req.header('Authorization').replace('Bearer ', '');
     
     try {      
         const data = await authService.decodeToken(token);
@@ -86,7 +95,8 @@ exports.post = async(req, res, next) => {
         });
     } catch(e) {
         return res.status(500).send({
-            message: 'Item não adicionado ao carrinho'
+            message: 'Item não adicionado ao carrinho',
+            error: e
         });
     }
 };

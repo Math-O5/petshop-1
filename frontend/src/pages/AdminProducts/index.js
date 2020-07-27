@@ -19,7 +19,13 @@ export default function Logon() {
     const [title, setTitle] = useState('');
     const [slug, setSlug] = useState('');
     const [description, setDescription] = useState('');
+    const [brand, setBrand] = useState('');
     const [price, setPrice] = useState('');
+    const [priceSold, setPriceSold] = useState('');
+    const [filepath, setFilepath] = useState('');
+    const [quantityStore, setQuantityStore] = useState('');
+    const [type, setType] = useState([]);
+    const [animal, setAnimal] = useState([]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -40,8 +46,42 @@ export default function Logon() {
         history.push(`/products/${id}`);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setLoading(true);
+        try {
+            const data = {
+                title,
+                slug,
+                description,
+                brand,
+                price,
+                priceSold,
+                filepath,
+                quantityStore,
+                type,
+                animal
+            }
+            
+            const response = await axios.post("/product", data);
+
+            products.push(data);
+            setShowModal(false);
+
+            setTitle('');
+            setSlug('');
+            setDescription('');
+            setBrand('');
+            setPriceSold('');
+            setFilepath('');
+            setQuantityStore('');
+            setType([]);
+            setAnimal([]);
+        } catch (error) {
+            console.log(error);
+        }
+        setLoading(false);
     };
 
     return (
@@ -93,13 +133,81 @@ export default function Logon() {
                                 />
                         </div>
                         <div className="row">
-                                <label for="name">Preço do Produto: </label>
+                                <label for="name">Marca: </label>
+                                <input 
+                                value={brand}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    setBrand(e.target.value);
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Preço da Venda: </label>
                                 <input 
                                 value={price}
                                 name="price" 
                                 class="form-control"
                                 onChange={(e) => {
                                     setPrice(e.target.value);
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Preço de Compra: </label>
+                                <input 
+                                value={priceSold}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    setPriceSold(e.target.value);
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Quantidade do estoque: </label>
+                                <input 
+                                value={quantityStore}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    setQuantityStore(e.target.value);
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Animal: </label>
+                                <input 
+                                value={animal}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    let a = e.target.value;
+                                    setAnimal(a.split(" "));
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Tipo do produto: </label>
+                                <input 
+                                value={type}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    let a = e.target.value;
+                                    setType(a.split(" "));
+                                }}
+                                />
+                        </div>
+                        <div className="row">
+                                <label for="name">Caminho da foto: </label>
+                                <input 
+                                value={filepath}
+                                name="price" 
+                                class="form-control"
+                                onChange={(e) => {
+                                    setFilepath(e.target.value);
                                 }}
                                 />
                         </div>

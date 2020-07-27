@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import Loading from '../../components/Loading';
 
 
 export default function Logon() {
     const history = useHistory();
+    const [showModal, setShowModal] = useState(false);
 
-    const selectRow = () => {
-        history.push('/clients/info');
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get("/user");
+                setUsers(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
+
+    const selectRow = (id) => {
+        history.push(`/clients/${id}`);
     }
 
     return (
         <main class="products" id="admin">
             <div class="title">
                 <h1>Clientes</h1>
-                <a href="admin_clients_add.html"><button class="button">Adicionar</button></a>
             </div>
 
             <div class="filter">
@@ -35,20 +56,20 @@ export default function Logon() {
             <table>
                 <thead>
                     <td>nome</td>
+                    <td>email</td>
                     <td>telefone</td>
                     <td>endereço</td>
                 </thead>
                 <tbody>
-                    <tr onClick={() => selectRow()} >
-                        <td>Pessoa Pessoa</td>
-                        <td>xx xxxxx-xxxx</td>
-                        <td>Rua Wwwwwwww</td>
+                {loading && (<Loading />)}
+                {users.map(user => (
+                    <tr key={user._id} onClick={() => selectRow(user._id)} >
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.tel}</td>
+                        <td>{user.address}</td>
                     </tr>
-                    <tr>
-                        <td>Pessoa Pessoa</td>
-                        <td>xx xxxxx-xxxx</td>
-                        <td>Rua Wwwwwwww</td>
-                    </tr>
+                ))}
                 </tbody>
             </table>
 

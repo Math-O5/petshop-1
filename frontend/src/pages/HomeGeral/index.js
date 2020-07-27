@@ -58,14 +58,14 @@ export default function Logon() {
             <section className="products">
                 <div className="text">
                     <h2>Nossos produtos</h2>
-                    <a href="../product/products.html">
+                    <Link to="/products">
                         <p>Ver mais</p>
-                    </a>
-                    <a href="../product/product_detail.html"><img src={arrowImg} alt="enter" /></a>
+                    </Link>
+                    <Link to="/products"><img src={arrowImg} alt="enter" /></Link>
                 </div>
                 <div className="preview">
                     {loading && (<Loading />)}
-                    {products.slice(0,Math.min(products.length, 5)).map(product => (
+                    {products.slice(0,Math.min(products.length, 4)).map(product => (
                         <ProductItem data={product}/>
                     ))}
                 </div>
@@ -75,14 +75,14 @@ export default function Logon() {
             <section className="products">
                 <div className="text">
                     <h2>Nossos serviços</h2>
-                    <a href="../service/services.html">
+                    <Link to="/services">
                         <p>Ver mais</p>
                         <img src={arrowImg} alt="enter" />
-                    </a>
+                    </Link>
                 </div>
                 <div className="preview">
                     {loading && (<Loading />)}
-                    {services.slice(0,Math.min(services.length, 5)).map(product => (
+                    {services.slice(0,Math.min(services.length, 4)).map(product => (
                         <ProductItem data={product}/>
                     ))}
                 </div>

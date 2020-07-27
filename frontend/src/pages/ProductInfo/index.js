@@ -25,6 +25,7 @@ export default function Logon(props) {
             try {
                 const response = await axios.get(`/product/${productId}`);
                 setProduct(response.data);
+                console.log(response.data)
             } catch (error) {
                 console.log(error);
             }

@@ -3,6 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 
 import './styles.css';
 
+import Auth from '../../services/auth';
+
+
 import logoImg from '../../images/logo.png';
 import menuImg from '../../images/menu.svg';
 import userImg from '../../images/user.svg';
@@ -27,6 +30,11 @@ export default function Logon() {
         }
     }
 
+    async function handleLogout() {
+        Auth.logOut()
+        history.push('/');
+    }
+
     return (
         <header class="user">
             <div class="main">
@@ -44,14 +52,10 @@ export default function Logon() {
                     <img src={menuImg} alt="menu" id="menu" onClick={() => load()} />
                     
                 </nav>
-                <nav class="user-area">
-                    <a href="#">
-                        <p>User Name</p>
-                        <img src={userImg} alt="user" />
-                    </a>
-                    <a href="#  ">
-                        <img src={logoutImg} alt="logout" />
-                    </a>
+                <nav class="user-area" style={{cursor: "pointer"}}>
+                    <p>User Name</p>
+                    <img src={userImg} alt="user" />
+                    <img style={{cursor: "pointer"}} src={logoutImg} alt="logout" onClick={() => handleLogout()} />
                 </nav> 
             </div>
             <div class="second" id="secondBar">

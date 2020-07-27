@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import Loading from '../../components/Loading';
 
 
 export default function Logon() {
     const history = useHistory();
+    const [showModal, setShowModal] = useState(false);
+
+    const [admins, setAdmins] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get("/admin");
+                setAdmins(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
+
 
     const selectRow = () => {
         history.push('/admins/info');
@@ -35,20 +58,20 @@ export default function Logon() {
             <table>
                 <thead>
                     <td>nome</td>
+                    <td>email</td>
                     <td>telefone</td>
                     <td>endereço</td>
                 </thead>
                 <tbody>
-                    <tr onClick={() => selectRow()} >
-                        <td>Pessoa Pessoa</td>
-                        <td>xx xxxxx-xxxx</td>
-                        <td>Rua Wwwwwwww</td>
+                {loading && (<Loading />)}
+                {admins.map(admin => (
+                    <tr key={admin._id} onClick={() => selectRow(admin._id)} >
+                        <td>{admin.username}</td>
+                        <td>{admin.email}</td>
+                        <td>{admin.tel}</td>
+                        <td>{admin.address}</td>
                     </tr>
-                    <tr>
-                        <td>Pessoa Pessoa</td>
-                        <td>xx xxxxx-xxxx</td>
-                        <td>Rua Wwwwwwww</td>
-                    </tr>
+                ))}
                 </tbody>
             </table>
 
