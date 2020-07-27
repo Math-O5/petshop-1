@@ -1,15 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import axios from 'axios';
 
 import './styles.css';
 
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import Loading from '../../components/Loading';
 
 
-export default function Logon() {
+export default function Logon(props) {
     const history = useHistory();
+    const [showModal, setShowModal] = useState(false);
+
+    const userId = props.match.params.id;
+
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`/user/${userId}`);
+                setUser(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     return (
         <main class="products" id="admin">
@@ -20,19 +44,19 @@ export default function Logon() {
             <div class="info">
                 <div class="row">
                     <p>Nome:</p>
-                    <p>Pessoa Pessoa</p>
+                    <p>{user.username}</p>
                 </div>
                 <div class="row">
                     <p>Telefone:</p>
-                    <p>xx xxxxx-xxxx</p>
+                    <p>{user.tel}</p>
                 </div>
                 <div class="row">
                     <p>Endereço:</p>
-                    <p>Rua Wwwwwwww</p>
+                    <p>{user.address}</p>
                 </div>
                 <div class="row">
                     <p>Data de nascimento:</p>
-                    <p>31/01/1960</p>
+                    <p>{user.born}</p>
                 </div>
             </div>
 
