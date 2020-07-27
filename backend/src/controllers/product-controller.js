@@ -67,6 +67,7 @@ exports.post = async(req, res, next) => {
         description: req.body.description,
         filepath: req.body.filepath,
         price: req.body.price,
+        priceCost: req.body.priceCost,
         brand: req.body.brand,
         animals: req.body.animals,
         quantityStore: req.body.quantityStore,
@@ -111,6 +112,7 @@ exports.put = async(req, res, next) => {
         description: req.body.description,
         filepath: req.body.filepath,
         price: req.body.price,
+        priceCost: req.body.priceCost,
         quantityStore: req.body.quantityStore,
         quantitySold: 0,
         type: req.body.type,
@@ -122,7 +124,8 @@ exports.put = async(req, res, next) => {
     contract.hasSpace(product.slug, 'O Slug não pode haver espaçoes');
     contract.isNumber(product.quantityStore, 'A quantidade em estoque deve ser um número');
     contract.isNumber(product.quantitySold, 'A quantidade vendida deve ser um número');
-    contract.isNumber(product.price, 'O valor é um número');
+    contract.isNumber(product.priceCost, 'O valor de compra do produto é um número');
+    contract.isNumber(product.price, 'O valor do produto é um número');
     contract.hasMinValue(product.quantityStore, 0, 'O estoque já está vazio');
 
     // If one fail, return error 400 and message
@@ -153,3 +156,4 @@ exports.delete = async(req, res, next) => {
         });
     }
 };
+

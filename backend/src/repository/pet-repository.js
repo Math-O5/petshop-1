@@ -31,6 +31,14 @@ exports.add = async(user, pet) => {
     }
 }
 
+exports.put = async(user, pet) => {
+    try {
+        await Pet.findByIdAndUpdate(pet);        
+    } catch(e) {
+        return e;
+    }
+}
+
 exports.remove = async(petId) => {
     const pet = await Pet.findById(petId);
     pet.remove();

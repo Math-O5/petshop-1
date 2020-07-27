@@ -132,6 +132,61 @@ exports.register = async(req, res, next) => {
     }
 };
 
+exports.put = async(req, res, next) => {    
+    let pet = { 
+        name: req.body.name, 
+        age: req.body.age,
+        race: req.body.race, 
+        description: req.body.description,
+        filepath: req.body.filepath,
+    };
+    
+    // Validate input
+    let contract = new ValidationContract();
+    contract.hasMinValue(pet.age, 0, 'O animal pode no minimo ter 0 ano');
+    contract.hasMinLen(pet.name, 0, 'O nome do pet é obrigatório');
+    contract.hasMinLen(pet.description, 10, 'Precisamos de uma breve descrição do seu pet');
+    contract.hasMaxLen(pet.name, 20, 'O nome do pet execeu o limite de caracteres(20)');
+    contract.hasMaxLen(pet.description, 150, 'A descrição do pet execedeu o limite de caracteres(20)');
+    
+    if(!contract.isValid()) {
+        return res.status(400).json({
+            message: contract.firstError().message,
+        })
+    }
+    
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    try {      
+
+        const matchPet = await Pet.findOne({name: pet.name});
+        if(matchPet) {
+            return res.status(400).send({
+                message: 'Um pet com esse nome já existe'
+            })
+        }
+
+        // Retrieve user
+        const data = await authService.decodeToken(token);
+        let user = await User.findById(data.id);
+
+        if(!user) {
+            return res.status(400).send({
+                message: 'Usuário não encontrado',
+            });
+        }
+
+        await repository.update(user, pet);
+
+        return res.status(201).send({
+            message: 'Pet registrado com sucesso',
+        });
+    } catch(e) {
+        return res.status(500).send({
+            message: 'O registro não foi finalizado',
+        });
+    }
+};
+
 exports.delete = async(req, res, next) => {    
     let productId = req.body.productId;
     

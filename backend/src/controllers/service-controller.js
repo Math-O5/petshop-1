@@ -148,3 +148,30 @@ exports.delete = async(req, res, next) => {
         });
     }
 };
+
+exports.postSlot = async(req, res, next) => {
+    try {
+        Service.findByIdAndUpdate(req.params.id, { $push: { free: req.body.data }});
+        res.status(200).send({
+            message: "Registrado"
+        });
+    } catch (e) {
+        res.status(500).send({
+            message: 'Falha ao atualizar.',
+        });
+    } 
+}
+
+exports.reserve = async(req, res, next) => {
+    try {
+        Service.findByIdAndUpdate(req.params.id, { $push: { free: req.body.data }});
+        res.status(200).send({
+            message: "Registrado"
+        });
+    } catch (e) {
+        res.status(500).send({
+            message: 'Falha ao atualizar.',
+        });
+    } 
+}
+

@@ -34,9 +34,12 @@ const service = new Schema({
     },
     free: [{
         type: String,
-        hours: [{
-            type: Number,
-        }]
+        date: {
+            type: String,
+            hours: [{
+                type: Number,
+            }]
+        }
     }],
     busy: [{
         type: String,
@@ -44,6 +47,9 @@ const service = new Schema({
             type: Number,
         }]
     }],
+    hours: [{
+        type: Number,
+    }]
 }, { timestamps: true });
  
 module.exports = mongoose.model('Service', service);
