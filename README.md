@@ -10,14 +10,15 @@
 <h2>Descrição</h2>
 <p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3 e React. O intuito foi aplicar conceitos de web e UX Design – User experience - para prática-los.No site, foram desenvolvidas funcionalidades que pudessem gerar uma interface entre o pet shop que vende produtos e serviços e os clientes. Assim, criamos essas duas seções principais, que permite administradores púbicarem e modificarem serviços e produtos, enquantos os clientes, ao cadastrarem-se, podem comprar, adicionar ao carrinho, cadastrar pets e agendar serviços. Outras funcionalidades adjacêntes também foram implementadas. A seguir uma descrição técnica.</p>
 
-<h2>Running... localhost:8000/index.html</h2>
+### Fase 1: html_css 
+Prototipo em Html e Css.
 
-```
-python3 -m http.server 
-```
-```
-python -m SimpleHTTPServer
-```
+### Fase 2 e 3: React + Nodejs
+Implementação do frontend em React e do backend em Nodejs e mongooose. 
+
+## Execution
+Para executar o servidor entre na backend/README.md.
+Para executar oa aplicação entre em frontend/README.md
 
 <h2>Fluxograma recomendado para o usuário</h2>
 <p>Ao entrar na HOME, o usuário entrar e pode ver os proutos, lista-los, filtra-los, adiciona-los ao carrinho, agendar um serviço, adicionar pets e editar o perfil.</p>
