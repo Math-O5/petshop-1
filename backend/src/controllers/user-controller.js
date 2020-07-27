@@ -62,11 +62,9 @@ exports.getAdmins = async(req, res, next) => {
  * @obj Get info user
  * @acess private
  */
-exports.getByUsername = (req, res, next) => {
+exports.getById = (req, res, next) => {
     User
-        .findOne({
-            username: req.params.username,
-        }, 'id username email address role tel born petsId') 
+        .findById(req.params.id) 
         .then(data => {
             return res.status(200).json(data);
         }).catch(e =>  {

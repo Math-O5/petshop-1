@@ -20,19 +20,23 @@ exports.create = async(data) => {
 
 exports.add = async(cart, item) => {
     try {
-        let index = cart.products.findIndex(prod => prod.productId == item.productId);
+        let index = cart.productId.indexOf(item.productId);
   
-        if(index > -1 && item.quantity <= 0) {
-            cart.products.splice(index, 1);
+        if(index > -1 && item.quantity <= "0") {
+            cart.productId.splice(index, 1);
+            cart.title.splice(index, 1);
+            cart.quantity.splice(index, 1);
+            cart.price.splice(index, 1);
         } else if (index > -1) {
-            let productItem = cart.products[index];
-            productItem.quantity = item.quantity;
-            productItem.price = item.price,
-            productItem.title = item.title, 
-            cart.products[index] = productItem;
+            cart.quantity.set(index, item.quantity);
+            cart.title.set(index, item.title);
+            cart.price.set(index, item.price);
         } else {
             // the product is not in the cart
-            cart.products.push(item);
+            cart.productId.push(item.productId);
+            cart.quantity.push(item.quantity);
+            cart.title.push(item.title);
+            cart.price.push(item.price);
         }
         return await cart.save();
     } catch(e) {
@@ -46,7 +50,10 @@ exports.removeProduct = async(cart, itemId) => {
     
         // Delete element from array
         if (index > -1) {
-            cart.products.splice(index, 1);
+            cart.products.productId.splice(index, 1);
+            cart.products.title.splice(index, 1);
+            cart.products.quantity.splice(index, 1);
+            cart.products.price.splice(index, 1);
         } 
 
         return await cart.save();
