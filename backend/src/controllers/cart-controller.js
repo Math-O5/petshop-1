@@ -102,7 +102,7 @@ exports.post = async(req, res, next) => {
 };
 
 exports.delete = async(req, res, next) => {    
-    let productId = req.body.productId;
+    let productId = req.params.id;
     
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
     
@@ -117,8 +117,9 @@ exports.delete = async(req, res, next) => {
         }
         
         let cart = await Cart.findById(user.cartId);
-
-        await repository.removeProduct(cart, productId);
+        
+        cart.products = [];
+        // await repository.removeProduct(cart, productId);
 
         return res.status(200).send({
             message: 'Item removido ao carrinho'
@@ -130,55 +131,38 @@ exports.delete = async(req, res, next) => {
     }
 };
 
-const mapCart = (obj) => {
-    let productsId = [];
-    for(let i = 0; i < obj.products.length; ++i) {
-        productsId.push(obj.products.productId);
-    }
-    return productsId;
-}  
-
 exports.buy = async(req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    
-
+    let result;
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
+        let cart = await Cart.findOne({'_id': user.cartId}, 'productId');
 
-        let cart = await Cart.findById(user.cartId);
-        
-        if(!user) {
+        if(true) {
             return res.status(400).send({
+                cart: cart,
+                type: typeof cart,
                 message: 'Usuário não encontrado',
             });
         }
 
-        cart = await mapCart(cart);
-
-    
-        let products = await Product.find({
-            '_id' : { $in: cart  }
-            }, {mult: true}, function(err, product) {
-            if(err) {
-                return res.status(500).send({
-                    prod: product,
-                    message: 'Falha ao buscar usuário',
-                    e: err,
-                });
+        // result = await cart.products.find({}, 'productId');
+        let products = await Product.updateMany({
+                '_id' :  { $in: cart }
+                }, { $inc: { quantity: -cart.quantity }}, function(err, product) {
+                if(err) {
+                    return res.status(500).send({
+                        prod: product,
+                        message: 'Falha ao buscar usuário',
+                        e: err,
+                    });
             }
         });
+
         return res.status(200).send({
-            product: products,
-            prod: productsId,
             message: 'success',
         });
-             
-        // else {
-        //     return res.status(400).send({
-        //         message: 'carrinho não encontrado',
-        //     });
-        // }
     } catch(e) {
         return res.status(400).send({
             message: 'error',
