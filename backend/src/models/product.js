@@ -30,6 +30,10 @@ const product = new Schema({
         type: Number,
         required: [true, 'O preço é obrigatório']
     },
+    priceCost: {
+        type: Number,
+        required: [true, 'O preço é obrigatório']
+    },
     quantityStore: {
         type: Number,
         required: [true, 'Informe a quantidade disponível']

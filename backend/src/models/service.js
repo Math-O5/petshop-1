@@ -32,9 +32,23 @@ const service = new Schema({
         type:String,
         Required: [true, 'A imagem é obrigatória']
     },
-    hours: [{
+    free: [{
         type: String,
-        required: true
+        date: {
+            type: String,
+            hours: [{
+                type: Number,
+            }]
+        }
+    }],
+    busy: [{
+        type: String,
+        hours: [{
+            type: Number,
+        }]
+    }],
+    hours: [{
+        type: Number,
     }]
 }, { timestamps: true });
  

@@ -73,7 +73,8 @@ exports.getById = (req, res, next) => {
                 data: e
             });
         });
-    }
+
+}
 
 exports.getByUsername = (req, res, next) => {
     User
