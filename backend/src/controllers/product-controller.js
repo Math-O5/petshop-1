@@ -137,7 +137,8 @@ exports.put = async(req, res, next) => {
         res.status(200).send({data});
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao cadastrar produto',
+            message: 'Falha ao atualizar produto',
+            errors: contract.errors()
         });
     }
 };
