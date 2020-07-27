@@ -73,7 +73,20 @@ exports.getById = (req, res, next) => {
                 data: e
             });
         });
-    }
+}
+
+exports.getByUsername = (req, res, next) => {
+    User
+        .findById(req.params.id) 
+        .then(data => {
+            return res.status(200).json(data);
+        }).catch(e =>  {
+            res.status(400).send({
+                message: 'Falha ao buscar user',
+                data: e
+            });
+        });
+}
     
 /**
  * @route POST http://localhost:3001/users/newUser/register

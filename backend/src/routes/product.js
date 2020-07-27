@@ -11,7 +11,7 @@ router.get('/:id', controllerProducts.getById);
 router.get('/slug/', controllerProducts.getBySlug);
 router.get('/type/:type', controllerProducts.getByType);
 router.post('/', authService.authorize(Role.Admin), controllerProducts.post);
-router.put('/', authService.authorize(Role.Admin), controllerProducts.put);
+router.put('/:id', authService.authorize(Role.Admin), controllerProducts.put);
 router.delete('/:id', authService.authorize(Role.Admin), controllerProducts.delete);
 
 module.exports = router;

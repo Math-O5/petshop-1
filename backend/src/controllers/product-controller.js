@@ -111,6 +111,7 @@ exports.put = async(req, res, next) => {
         filepath: req.body.filepath,
         price: req.body.price,
         quantityStore: req.body.quantityStore,
+        quantitySold: 0,
         type: req.body.type,
     }
 
@@ -131,7 +132,7 @@ exports.put = async(req, res, next) => {
     }
   
     try {
-        let data = await repository.update(req.params.id, req.params.body)
+        let data = await repository.update(req.params.id, product);
         res.status(200).send({data});
     } catch (e) {
         res.status(500).send({

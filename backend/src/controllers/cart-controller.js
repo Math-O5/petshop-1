@@ -1,4 +1,4 @@
-    'use strict'
+'use strict'
 const repository = require('../repository/cart-repository');
 const ValidationContract = require('../validators/validators');
 const Product = require('../models/product');
@@ -18,12 +18,7 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {
-    let token = '';
-    if(!req.header('Authorization'))
-        token = req.body.token || req.query.token || req.headers['x-access-token'];
-    else 
-        token = req.header('Authorization').replace('Bearer ', '');
-        
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
@@ -67,11 +62,7 @@ exports.post = async(req, res, next) => {
         })
     }
 
-    let token = '';
-    if(!req.header('Authorization'))
-        token = req.body.token || req.query.token || req.headers['x-access-token'];
-    else 
-        token = req.header('Authorization').replace('Bearer ', '');
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
     
     try {      
         const data = await authService.decodeToken(token);
@@ -95,14 +86,13 @@ exports.post = async(req, res, next) => {
         });
     } catch(e) {
         return res.status(500).send({
-            message: 'Item não adicionado ao carrinho',
-            error: e
+            message: 'Item não adicionado ao carrinho'
         });
     }
 };
 
 exports.delete = async(req, res, next) => {    
-    let productId = req.params.id;
+    let productId = req.body.productId;
     
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
     
@@ -117,9 +107,8 @@ exports.delete = async(req, res, next) => {
         }
         
         let cart = await Cart.findById(user.cartId);
-        
-        cart.products = [];
-        // await repository.removeProduct(cart, productId);
+
+        await repository.removeProduct(cart, productId);
 
         return res.status(200).send({
             message: 'Item removido ao carrinho'
@@ -133,33 +122,34 @@ exports.delete = async(req, res, next) => {
 
 exports.buy = async(req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    let result;
+
     try {
         const data = await authService.decodeToken(token);
         const user = await User.findById(data.id);
-        let cart = await Cart.findOne({'_id': user.cartId}, 'productId');
 
-        if(true) {
+        let cart = await Cart.findById(user.cartId);
+        
+        if(!user) {
             return res.status(400).send({
-                cart: cart,
-                type: typeof cart,
                 message: 'Usuário não encontrado',
             });
         }
 
-        // result = await cart.products.find({}, 'productId');
-        let products = await Product.updateMany({
-                '_id' :  { $in: cart }
-                }, { $inc: { quantity: -cart.quantity }}, function(err, product) {
-                if(err) {
-                    return res.status(500).send({
-                        prod: product,
-                        message: 'Falha ao buscar usuário',
-                        e: err,
-                    });
-            }
+        for(let i = 0; i < cart.products.length; ++i) {
+            Product.update({'_id': cart.products[i].productId}, 
+            { 
+                $inc : {quantityStore : -cart.products[i].quantity }, 
+                $inc : {quantitySold : cart.products[i].quantity }
+            },
+            function(err, prod){
+                console.log('expect: ', prod);
+            });
+        }
+        
+        await Cart.updateMany({'_id': user.cartId}, { $set: { products: [] }}, function(err, cart){
+            console.log('affected: ', cart);
         });
-
+    
         return res.status(200).send({
             message: 'success',
         });

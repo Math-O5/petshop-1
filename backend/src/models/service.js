@@ -32,10 +32,18 @@ const service = new Schema({
         type:String,
         Required: [true, 'A imagem é obrigatória']
     },
-    hours: [{
+    free: [{
         type: String,
-        required: true
-    }]
+        hours: [{
+            type: Number,
+        }]
+    }],
+    busy: [{
+        type: String,
+        hours: [{
+            type: Number,
+        }]
+    }],
 }, { timestamps: true });
  
 module.exports = mongoose.model('Service', service);
