@@ -34,9 +34,9 @@ export default function Logon() {
     }, []);
 
 
-    const selectRow = () => {
-        history.push('/admins/info');
-    }
+    const selectRow = (id) => {
+        history.push(`/admins/${id}`);
+    };
 
     return (
         <main class="products" id="admin">

@@ -73,7 +73,11 @@ exports.getById = (req, res, next) => {
                 data: e
             });
         });
+<<<<<<< HEAD
 }
+=======
+    }
+>>>>>>> 3f0ecb65564585c914233f409838aeb2e6d6b32b
 
 exports.getByUsername = (req, res, next) => {
     User

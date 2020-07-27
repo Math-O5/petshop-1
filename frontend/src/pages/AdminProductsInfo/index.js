@@ -56,27 +56,27 @@ export default function Logon(props) {
                     </div>
                     <div class="row">
                         <p>Marca:</p>
-                        <p>food dog ADD MODEL</p>
+                        <p>{product.brand}</p>
                     </div>
                     <div class="row">
                         <p>preço de venda:</p>
-                        <p>{product.title}</p>
+                        <p>R${product.price}</p>
                     </div>
                     <div class="row">
                         <p>Preço de compra:</p>
-                        <p>R$ 20.00 ADD MODEL</p>
+                        <p>R${product.price}</p>
                     </div>
                     <div class="row">
                         <p>Quant. estoque:</p>
-                        <p>22 ADD MODEL</p>
+                        <p>{product.quantityStore}</p>
                     </div>
                     <div class="row">
                         <p>Quant. vendida:</p>
-                        <p>4 ADD MODEL</p>
+                        <p>{product.quantitySold}</p>
                     </div>
                     <div class="row">
                         <p>Lucro:</p>
-                        <p>R$ 80.00</p>
+                        <p>R${(product.price * product.quantitySold)}</p>
                     </div>
                 </div>
             </>)}

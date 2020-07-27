@@ -86,6 +86,7 @@ exports.post = async(req, res, next) => {
     if(!contract.isValid()) {
         return res.status(400).json({
             message: contract.firstError().message,
+            errors: contract.errors()
         })
     }
   
@@ -136,7 +137,8 @@ exports.put = async(req, res, next) => {
         res.status(200).send({data});
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao cadastrar produto',
+            message: 'Falha ao atualizar produto',
+            errors: contract.errors()
         });
     }
 };

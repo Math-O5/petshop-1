@@ -45,7 +45,7 @@ export default function Logon() {
                         <li><Link to="/products">Produtos</Link></li>
                         <li><Link to="/services">Serviços</Link></li>
                         <li><Link to="/admins">Administradores</Link></li>
-                        <li><Link to="/profit">Lucro</Link></li>
+                        {/* <li><Link to="/profit">Lucro</Link></li> */}
                     </ul>
                 </nav>
                 <nav class="mobile">
@@ -64,7 +64,7 @@ export default function Logon() {
                     <li><Link to="/products">Produtos</Link></li>
                     <li><Link to="/services">Serviços</Link></li>
                     <li><Link to="/admins">Administradores</Link></li>
-                    <li><Link to="/profit">Lucro</Link></li>
+                    {/* <li><Link to="/profit">Lucro</Link></li> */}
                 </ul>
             </div>
         </header>

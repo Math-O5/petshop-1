@@ -25,7 +25,7 @@ export default function Logon() {
     const [filepath, setFilepath] = useState('');
     const [quantityStore, setQuantityStore] = useState('');
     const [type, setType] = useState([]);
-    const [animal, setAnimal] = useState([]);
+    const [animals, setAnimals] = useState([]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -56,16 +56,19 @@ export default function Logon() {
                 slug,
                 description,
                 brand,
-                price,
+                price: Number(price),
                 priceSold,
                 filepath,
-                quantityStore,
+                quantityStore: Number(quantityStore),
                 type,
-                animal
+                animals
             }
             
+            console.log(data);
+
             const response = await axios.post("/product", data);
 
+            data.quantitySold = 0;
             products.push(data);
             setShowModal(false);
 
@@ -77,7 +80,7 @@ export default function Logon() {
             setFilepath('');
             setQuantityStore('');
             setType([]);
-            setAnimal([]);
+            setAnimals([]);
         } catch (error) {
             console.log(error);
         }
@@ -179,12 +182,12 @@ export default function Logon() {
                         <div className="row">
                                 <label for="name">Animal: </label>
                                 <input 
-                                value={animal}
+                                value={animals}
                                 name="price" 
                                 class="form-control"
                                 onChange={(e) => {
                                     let a = e.target.value;
-                                    setAnimal(a.split(" "));
+                                    setAnimals(a.split(" "));
                                 }}
                                 />
                         </div>
@@ -257,9 +260,9 @@ export default function Logon() {
                             <td>{product.title}</td>
                             <td>{product.price}</td>
                             <td>{product.price}</td>
-                            <td>22</td>
-                            <td>4</td>
-                            <td>R$ 80.00</td>
+                            <td>{product.quantityStore}</td>
+                            <td>{product.quantitySold}</td>
+                            <td>R${(product.price * product.quantitySold).toFixed(2)}</td>
                         </tr>
                     ))}
                     </tbody>

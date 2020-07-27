@@ -44,6 +44,8 @@ exports.update = async(id, data) => {
             price: data.price,
             filepath: data.filepath,
             quantityStore: data.quantityStore,
+            quantitySold: data.quantitySold,
+            type: data.type
         }
     });
     return res;

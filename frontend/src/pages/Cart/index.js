@@ -1,17 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import { FaPlus, FaMinus } from 'react-icons/fa'
+
+import axios from 'axios';
+
 import './styles.css';
+
+import Loading from '../../components/Loading';
+import addImg from '../../images/add.png';
+import minusImg from '../../images/minus.png';
 
 
 export default function Logon() {
     const history = useHistory();
+    const [loading, setLoading] = useState(false)
+    
+    const [orders, setOrders] = useState([]);
+    const [total, setTotal] = useState(0);
+
+    const loadData = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get("/cart/buy");
+            setOrders(response.data.products);
+        } catch (error) {
+            console.log(error);
+        }
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    useEffect(() => {
+        let aux = 0;
+        orders.map(order => {
+            aux += order.price * order.quantity; 
+        });
+        setTotal(aux);
+    }, [orders]);
+
+    const handleAdd = async (id, qtn) => {
+        setLoading(true);
+        try {
+            const data = {
+                productId: id,
+                quantity: qtn+1
+            }
+            
+            const response = await axios.post("/cart", data);
+            loadData();
+        } catch (error) {
+            console.log(error);
+        }
+        setLoading(false);
+    }
+
+    const handleMinus = async (id, qtn) => {
+        setLoading(true);
+        try {
+            const data = {
+                productId: id,
+                quantity: qtn-1
+            }
+            
+            const response = await axios.post("/cart", data);
+            loadData();
+        } catch (error) {
+            console.log(error);
+        }
+        setLoading(false);
+    }
+
 
     return (
         <div class="container">
             <div class="container-carrinho">
                 <h1>CARRINHO</h1>
                 <div class="carrinho-content">
+                    
                     <div class="items">
                         <table>
                             <tr>
@@ -20,106 +89,28 @@ export default function Logon() {
                                 <th>Quantidade</th>
                                 <th>Total</th>
                             </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
-                            <tr>
-                                <td>Ração</td>
-                                <td>R$40,00</td>
-                                <td>
-                                    <input type="text" name="qtd" id="qtd" value="1" /> 
-                                    <button>+</button>
-                                    <button>-</button>
-                                </td>
-                                <td>R$40,00</td>
-                            </tr>
+                            {orders.map(order => (
+                                <tr>
+                                    <td>{order.title}</td>
+                                    <td>R${order.price.toFixed(2)}</td>
+                                    <td style={{ textAlign: "center" }}>
+                                        <FaMinus style={{ margin: "0 20px"}} onClick={() => handleMinus(order.productId, order.quantity)} />
+                                        {order.quantity}
+                                        <FaPlus style={{ margin: "0 20px"}} onClick={() => handleAdd(order.productId, order.quantity)} />
+                                    </td>
+                                    <td>R${(order.quantity * order.price).toFixed(2)}</td>
+                                </tr>
+                            ))}
                         </table>
-                        
+                        {loading && (<Loading />)}
                     </div>
                     
                     <div class="resumo">
                         <h2>Resumo</h2>
                         <table>
                             <tr>
-                                <th>Produto</th>
-                                <td>R$40,00</td>
+                                <th>Produtos</th>
+                                <td>R${total.toFixed(2)}</td>
                             </tr>
                             <tr>
                                 <th>Frete</th>
@@ -132,7 +123,7 @@ export default function Logon() {
                                     Total
                                 </th>
                                 <td>
-                                    R$40,00
+                                    R${total.toFixed(2)}
                                 </td>
                             </tr>
                         </table>
