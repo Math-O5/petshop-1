@@ -25,7 +25,7 @@ export default function Logon() {
             const response = await axios.get("/cart/buy");
             setOrders(response.data.products);
 
-            if(response.data.products == undefined)
+            if(response.data == undefined || response.data.products)
                 setOrders([]);
         } catch (error) {
             console.log(error);
