@@ -86,6 +86,7 @@ exports.post = async(req, res, next) => {
     if(!contract.isValid()) {
         return res.status(400).json({
             message: contract.firstError().message,
+            errors: contract.errors()
         })
     }
   
@@ -111,6 +112,7 @@ exports.put = async(req, res, next) => {
         filepath: req.body.filepath,
         price: req.body.price,
         quantityStore: req.body.quantityStore,
+        quantitySold: req.body.quantitySold,
         type: req.body.type,
     }
 

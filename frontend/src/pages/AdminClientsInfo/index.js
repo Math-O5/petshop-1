@@ -7,9 +7,9 @@ import './styles.css';
 
 
 // componentes
-import ProductItem from '../../components/ProductItem';
 import Loading from '../../components/Loading';
 
+import profileImg from '../../images/profile.png';
 
 export default function Logon(props) {
     const history = useHistory();
@@ -41,23 +41,35 @@ export default function Logon(props) {
                 <h1>Clientes</h1>
                 <a href="admin_clients.html"><button class="button">Voltar</button></a>
             </div>
-            <div class="info">
-                <div class="row">
-                    <p>Nome:</p>
-                    <p>{user.username}</p>
+            <div class="info row">
+            {loading && (<Loading />)}                
+            {!loading && (<>
+                <div class="img-container">
+                    <img src={profileImg} alt="Imagem do produto" />
                 </div>
-                <div class="row">
-                    <p>Telefone:</p>
-                    <p>{user.tel}</p>
+                <div>
+                    <div class="row">
+                        <p>Nome:</p>
+                        <p>{user.username}</p>
+                    </div>
+                    <div class="row">
+                        <p>Email:</p>
+                        <p>{user.email}</p>
+                    </div>
+                    <div class="row">
+                        <p>Telefone:</p>
+                        <p>{user.tel}</p>
+                    </div>
+                    <div class="row">
+                        <p>Endereço:</p>
+                        <p>{user.address}</p>
+                    </div>
+                    <div class="row">
+                        <p>Data de nascimento:</p>
+                        <p>{user.born}</p>
+                    </div>
                 </div>
-                <div class="row">
-                    <p>Endereço:</p>
-                    <p>{user.address}</p>
-                </div>
-                <div class="row">
-                    <p>Data de nascimento:</p>
-                    <p>{user.born}</p>
-                </div>
+            </>)}
             </div>
 
             <div class="row options">

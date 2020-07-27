@@ -11,7 +11,7 @@ const routes = {
   clients: '/clients',
   clientsInfo: '/clients/:id',
   admins: '/admins',
-  adminsInfo: '/admins/info',
+  adminsInfo: '/admins/:id',
   profit: '/profit',
 };
   
