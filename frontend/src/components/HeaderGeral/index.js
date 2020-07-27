@@ -92,7 +92,7 @@ export default function Logon() {
                             />
                         </div>
                         <button type="submit" className="btn">Logar</button>
-                        <button className="btn close" 
+                        <button type="button" className="btn close" 
                             onClick={() => setShowModal(false)}>Fechar</button>
                         {loading && <Loading />}
                     </form>

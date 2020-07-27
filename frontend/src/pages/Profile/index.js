@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 
+import axios from 'axios';
+
 import './styles.css';
+
+import profileImg from '../../images/profile.png';
 
 import Auth from '../../services/auth';
 
 export default function Logon() {
     const history = useHistory();
+
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(false);
+    
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            const userId = JSON.parse(localStorage.getItem('userData'));
+            console.log(userId);
+
+            try {
+                const response = await axios.get(`/user/${userId.id}`);
+                setUser(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+
+        loadData();
+    }, []);
 
     async function handleLogout() {
         Auth.logOut()
@@ -23,9 +49,9 @@ export default function Logon() {
                 
                 <div class="perfil-info">
                     
-                    <img src="/perfil/assets/img/avatar.svg" alt="Foto de perfil" />
+                    <img src={profileImg} alt="Foto de perfil" />
                     <div class="details-container">
-                        <h1>Pessoa</h1>
+                        <h1>{user.username}</h1>
                         <h2>Info</h2>
         
                         <table>
@@ -34,7 +60,7 @@ export default function Logon() {
                                     Telefone: 
                                 </th>
                                 <td>
-                                    (99) 99999-9999
+                                    {user.tel}
                                 </td>
                             </tr>
                             <tr>
@@ -42,7 +68,7 @@ export default function Logon() {
                                     Email: 
                                 </th>
                                 <td>
-                                    nome@dominio.com
+                                    {user.email}
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +76,7 @@ export default function Logon() {
                                     Endereço:
                                 </th>
                                 <td>
-                                    Rua Lorem, 00. Bairro Ipsum - São Carlos
+                                    {user.address}
                                 </td>
                             </tr>
                             <tr>
@@ -58,7 +84,7 @@ export default function Logon() {
                                     Nascimento
                                 </th>
                                 <td>
-                                    DD/MM/AAAA
+                                    {user.born}
                                 </td>
                             </tr>
                         </table>

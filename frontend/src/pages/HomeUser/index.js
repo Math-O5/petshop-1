@@ -12,6 +12,7 @@ import arrowImg from '../../images/arrow.png';
 
 // componentes
 import ProductItem from '../../components/ProductItem';
+import ServiceItemHome from '../../components/ServiceItemHome';
 import Loading from '../../components/Loading';
 
 
@@ -85,7 +86,7 @@ export default function Logon() {
                 <div class="preview">
                     {loading && (<Loading />)}
                     {services.slice(0,Math.min(services.length, 4)).map(product => (
-                        <ProductItem data={product}/>
+                        <ServiceItemHome data={product}/>
                     ))}
                 </div>
             </section>
