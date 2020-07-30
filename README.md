@@ -8,16 +8,17 @@
 ***
 
 <h2>Descrição</h2>
-<p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3 e React. O intuito foi aplicar conceitos de web e UX Design – User experience - para prática-los.No site, foram desenvolvidas funcionalidades que pudessem gerar uma interface entre o pet shop que vende produtos e serviços e os clientes. Assim, criamos essas duas seções principais, que permite administradores púbicarem e modificarem serviços e produtos, enquantos os clientes, ao cadastrarem-se, podem comprar, adicionar ao carrinho, cadastrar pets e agendar serviços. Outras funcionalidades adjacêntes também foram implementadas. A seguir uma descrição técnica.</p>
+<p> <strong>Pet Shop Online</strong> é um site desenvolvido utilizando HTML5, CSS3, React e Nodejs. O intuito foi aplicar conceitos de desenvolvimento web e UX Design – User experience - para prática-los. No site, foram desenvolvidas funcionalidades que pudessem gerar uma interface entre o pet shop que vende produtos e serviços e os clientes. Assim, criamos essas duas seções principais, que permite administradores púbicarem e modificarem serviços e produtos, enquantos os clientes, ao cadastrarem-se, podem comprar, adicionar ao carrinho, cadastrar pets e agendar serviços. Outras funcionalidades adjacêntes também foram implementadas. A seguir uma descrição técnica.</p>
 
-### Fase 1: html_css 
-Prototipo em Html e Css.
+### Fase 1: Mockup
+Prototipo em Html e Css. Veja aqui: 
 
 ### Fase 2 e 3: React + Nodejs
-Implementação do frontend em React e do backend em Nodejs e mongooose. 
+Estrutura backend: <a href="https://hackmd.io/Ubgkw6GYR2akPzks59-eIg">Backend</a>
+Implementação do frontend em React e do backend em Nodejs e mongooose. Seguida da integração de ambos.  
 
 ## Execution
-Para executar o servidor entre na backend/README.md.
+Para executar o servidor entre no backend/README.md.
 Para executar oa aplicação entre em frontend/README.md
 
 <h2>Fluxograma recomendado para o usuário</h2>
